@@ -7,23 +7,31 @@
 
 <script>
 import axios from "axios";
-import { Whois } from "../services/Whois";
+import Api from "../services/Api";
 
 export default {
   name: "LinkCard",
   props: {
-    urls: []
+    urls: [],
+    whois: []
   },
   created() {
-    this.$store.dispatch('loadWhois');
-    console.log(this.whois);
-  },
-  computed: {
-    whois() {
-      return this.$store.state.whois;
-    },
+    var urls = this.tweet.entities.urls;
+    var whois = [];
+    var self = this;
 
-  }
+    for (let i = 1; i < urls.length; i++) {
+      Api.get(`whois/${urls[i]}`)
+        .then(function(result) {
+          whois.push(result.data);
+          console.log(result.data);
+        })
+        .catch(error => {
+          throw new Error("API ERROR");
+        });
+        whois = this.whois;
+    }
+  },
 };
 </script>
 

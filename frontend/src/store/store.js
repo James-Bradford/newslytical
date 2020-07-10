@@ -56,23 +56,6 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
-        loadWhois({state}, tweet) {
-            var urls = tweet.entities.urls;
-            var whois = [];
-            var self = this;
-
-            for (let i = 1; i < urls.length; i++ ) {
-                Api.get(`whois/${urls[i]}`)
-                .then(function (result) {
-                    whois.push(result.data);
-                    console.log(result.data);
-                    self.commit('SAVE_WHOIS', whois);
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-            }
-         
-        },
         setTab({ commit }, tab) {
             this.commit('SAVE_TAB', tab);
         }

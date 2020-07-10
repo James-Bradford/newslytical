@@ -64,24 +64,8 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
-    loadWhois: function loadWhois(_ref2, tweet) {
-      var state = _ref2.state;
-      var urls = tweet.entities.urls;
-      var whois = [];
-      var self = this;
-
-      for (var i = 1; i < urls.length; i++) {
-        _Api["default"].get("whois/".concat(urls[i])).then(function (result) {
-          whois.push(result.data);
-          console.log(result.data);
-          self.commit('SAVE_WHOIS', whois);
-        })["catch"](function (error) {
-          throw new Error("API ERROR");
-        });
-      }
-    },
-    setTab: function setTab(_ref3, tab) {
-      var commit = _ref3.commit;
+    setTab: function setTab(_ref2, tab) {
+      var commit = _ref2.commit;
       this.commit('SAVE_TAB', tab);
     }
   }
