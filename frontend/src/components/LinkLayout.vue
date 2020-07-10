@@ -1,10 +1,15 @@
 <template lang="pug">
   v-container.fill-height
-    v-row(cols='12' md='4' justify='center' align='center')
-      link-card(:urls='urls')
+    v-row(justify='center' align='center')
+      v-col(cols='12' md='8')
+        link-card
+      v-col(cols='12' md='4')
+        link-whois(:urls='urls')
+
 </template>
 
 <script>
+import LinkWhois from './LinkWhois';
 import LinkCard from './LinkCard';
 import { Whois } from '../services/Whois';
 
@@ -13,6 +18,7 @@ var whois = new Whois();
 export default {
   name: "Link",
   components: {
+    LinkWhois,
     LinkCard
   },
   props: {
