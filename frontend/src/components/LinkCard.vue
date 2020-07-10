@@ -8,6 +8,7 @@
 <script>
 import axios from "axios";
 import Api from "../services/Api";
+var psl = require("psl");
 
 export default {
   name: "LinkCard",
@@ -20,25 +21,44 @@ export default {
       return this.$store.state.tweet;
     }
   },
+  methods: {
+    extractHostname(url) {
+      var hostname;
+      //find & remove protocol (http, ftp, etc.) and get hostname
+
+      if (url.indexOf("//") > -1) {
+        hostname = url.split("/")[2];
+      } else {
+        hostname = url.split("/")[0];
+      }
+
+      //find & remove port number
+      hostname = hostname.split(":")[0];
+      //find & remove "?"
+      hostname = hostname.split("?")[0];
+
+      return hostname;
+    }
+  },
+
   created() {
-    console.log(this.tweet.entities.urls);
     var urls = this.tweet.entities.urls;
     var whois = [];
     var self = this;
+    var url;
 
-
-    for (let i = 1; i < urls.length; i++) {
-      Api.get(`whois/${urls[i]}`)
+    for (let i = 0; i < urls.length; i++) {
+      url = psl.get(this.extractHostname(urls[i].expanded_url));
+      Api.get(`whois/${url}`)
         .then(function(result) {
           whois.push(result.data);
         })
         .catch(error => {
           throw new Error("API ERROR");
         });
-        whois = this.whois;
-        console.log(whois);
+      this.whois = whois;
     }
-  },
+  }
 };
 </script>
 
