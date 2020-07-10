@@ -1,9 +1,9 @@
 <template lang="pug">
-    v-card.py-2(color="warning")
-      v-card-title.white--text
-        v-icon.mdi.mdi-link(color="white")
+    v-card.pa-2.elevation-4(color="warning")
+      v-card-title.white--text.text-h4
+        v-icon.mdi.mdi-link(color='white' x-large)
         | Whois Data
-      v-expansion-panels(popout)
+      v-expansion-panels
         v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls' :key='u')
           v-expansion-panel-header {{ url.expanded_url }}
           v-expansion-panel-content 

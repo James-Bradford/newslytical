@@ -1,10 +1,10 @@
 <template lang="pug">
-  v-container.fill-height
-    v-row(justify='center' align='center')
-      v-col(cols='12' md='8')
-        link-card
-      v-col(cols='12' md='4')
+  v-container.px-lg-16.fill-height
+    v-row.px-lg-16(justify='center' align='center')
+      v-col(cols='12' md='5')
         link-whois(:urls='urls')
+      v-col(cols='12' md='7')
+        link-card
 
 </template>
 
