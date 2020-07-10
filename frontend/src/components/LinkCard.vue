@@ -1,8 +1,9 @@
 <template lang="pug">
       v-expansion-panels(popout)
-        v-expansion-panel(v-for='(url, u) in this.whois' :key='u')
-          v-expansion-panel-header {{url.WhoisRecord.domainName}}
+        v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls' :key='u')
+          v-expansion-panel-header {{ url.expanded_url }}
             v-expansion-panel-content
+              |{{ isHTTPS(url.expanded_url) }}
 </template>
 
 <script>
@@ -38,6 +39,11 @@ export default {
       hostname = hostname.split("?")[0];
 
       return hostname;
+    },
+    isHTTPS(url) {
+      if (url.match(/^[^:]+/) == "https") {
+        return true
+      } else { return false }
     }
   },
 
@@ -49,14 +55,22 @@ export default {
 
     //Performs whois on each hostname in Tweet
     for (let i = 0; i < urls.length; i++) {
+
+      //Extract hostname
       url = psl.get(this.extractHostname(urls[i].expanded_url));
+
+      //Make API call
       Api.get(`whois/${url}`)
         .then(function(result) {
+
+          //Add result to array
           whois.push(result.data);
         })
         .catch(error => {
           throw new Error("API ERROR");
         });
+
+      //Assign local variable
       this.whois = whois;
     }
   }
