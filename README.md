@@ -1,8 +1,6 @@
 # newslytical (Work in Progress)
 > Web app and accompanying chrome extension to assist a user recognise misinformation in a Tweet.
 
-<details>
-  <summary>Screenshots</summary>
 <p align="center">
   <br>
   <kbd>
@@ -19,7 +17,6 @@
   <br>
     Example of link analysis from a Tweet
 </p>
-  </details>
 
 
 ## Frontend Setup
