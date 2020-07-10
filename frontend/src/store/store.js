@@ -56,8 +56,8 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
-        loadWhois({state}) {
-            var urls = state.tweet.entities.urls;
+        loadWhois({state}, tweet) {
+            var urls = tweet.entities.urls;
             var whois = [];
             var self = this;
 

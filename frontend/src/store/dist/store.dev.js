@@ -64,9 +64,9 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
-    loadWhois: function loadWhois(_ref2) {
+    loadWhois: function loadWhois(_ref2, tweet) {
       var state = _ref2.state;
-      var urls = state.tweet.entities.urls;
+      var urls = tweet.entities.urls;
       var whois = [];
       var self = this;
 
