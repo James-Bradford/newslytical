@@ -47,6 +47,7 @@ export default {
     var self = this;
     var url;
 
+    //Performs whois on each hostname in Tweet
     for (let i = 0; i < urls.length; i++) {
       url = psl.get(this.extractHostname(urls[i].expanded_url));
       Api.get(`whois/${url}`)

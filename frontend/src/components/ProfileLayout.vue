@@ -1,9 +1,9 @@
 <template lang="pug">
   v-container.px-lg-16(fill-height='')
     v-row.px-lg-16(align='center' justify='center')
-      v-col(cols='12' md='4')
+      v-col(cols='12' md='6')
         profile-overview(:tweet='tweet')
-      v-col(cols='12' md='8')
+      v-col(cols='12' md='6')
         profile-explanation(:tweet='tweet')
 </template>
 
