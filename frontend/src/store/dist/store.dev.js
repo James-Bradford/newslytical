@@ -17,11 +17,15 @@ _vue["default"].use(_vuex["default"]);
 
 var store = new _vuex["default"].Store({
   state: {
+    rawTweet: {},
     tweet: {},
     whois: [],
     tab: Number
   },
   mutations: {
+    SAVE_RAW_TWEET: function SAVE_RAW_TWEET(state, rawTweet) {
+      state.rawTweet = rawTweet;
+    },
     SAVE_TWEET: function SAVE_TWEET(state, tweet) {
       state.tweet = tweet;
     },
@@ -34,13 +38,30 @@ var store = new _vuex["default"].Store({
   },
   actions: {
     /**
+    * Call API to load Tweet and highlight
+    * @param {*} param0 
+    * @param {*} id 
+    */
+    loadRawTweet: function loadRawTweet(_ref, id) {
+      var commit = _ref.commit,
+          state = _ref.state;
+      var self = this; //Make API call
+
+      _Api["default"].get("twitter/".concat(id)).then(function (result) {
+        self.commit('SAVE_RAW_TWEET', result.data); //Throw error if needed
+      })["catch"](function (error) {
+        throw new Error("API ERROR");
+      });
+    },
+
+    /**
      * Call API to load Tweet and highlight
      * @param {*} param0 
      * @param {*} id 
      */
-    loadTweet: function loadTweet(_ref, id) {
-      var commit = _ref.commit,
-          state = _ref.state;
+    loadTweet: function loadTweet(_ref2, id) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
       var self = this; //Make API call
 
       _Api["default"].get("twitter/".concat(id)).then(function (result) {
@@ -64,8 +85,8 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
-    setTab: function setTab(_ref2, tab) {
-      var commit = _ref2.commit;
+    setTab: function setTab(_ref3, tab) {
+      var commit = _ref3.commit;
       this.commit('SAVE_TAB', tab);
     }
   }

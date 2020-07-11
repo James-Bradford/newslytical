@@ -1,5 +1,5 @@
 <template>
-  <v-card color="accent rounded-lg">
+  <v-card color="success rounded-lg">
     <!--<v-card-title>
             <v-icon large left>mdi-account</v-icon>
             <span class="title font-weight-light">Original Poster</span>

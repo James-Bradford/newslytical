@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        rawTweet: {},
         tweet: {},
         whois: [],
         tab: Number
     },
     mutations: {
+        SAVE_RAW_TWEET(state, rawTweet) {
+            state.rawTweet = rawTweet;
+        },
         SAVE_TWEET(state, tweet) {
             state.tweet = tweet;
         },
@@ -22,6 +26,25 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
+        /**
+ * Call API to load Tweet and highlight
+ * @param {*} param0 
+ * @param {*} id 
+ */
+        loadRawTweet({ commit, state }, id) {
+            var self = this;
+
+            //Make API call
+            Api.get(`twitter/${id}`)
+                .then(function (result) {
+
+                    self.commit('SAVE_RAW_TWEET', result.data)
+
+                    //Throw error if needed
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+        },
         /**
          * Call API to load Tweet and highlight
          * @param {*} param0 
@@ -51,7 +74,7 @@ export const store = new Vuex.Store({
                     //Assign modified tweet to state
                     self.commit('SAVE_TWEET', tweet)
 
-                //Throw error if needed
+                    //Throw error if needed
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });

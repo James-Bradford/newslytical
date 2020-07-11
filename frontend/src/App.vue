@@ -19,6 +19,7 @@ export default {
   }),
   created() {
     this.isLoading = true;
+    this.$store.dispatch("loadRawTweet", this.$route.params.id);
     this.$store.dispatch("loadTweet", this.$route.params.id);
     this.isLoading = false;
   }

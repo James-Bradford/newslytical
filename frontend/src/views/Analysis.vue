@@ -19,7 +19,7 @@ div
     // Words Tab
     v-tab-item(:key='4')
       v-container
-        h1 Words
+        words-layout
 
     v-tab-item(:key='5')
       v-container
@@ -57,13 +57,15 @@ div
 import TweetLayout from "../components/TweetLayout";
 import LinkLayout from "../components/LinkLayout";
 import ProfileLayout from "../components/ProfileLayout";
+import WordsLayout from "../components/WordsLayout";
 
 export default {
   name: "Analysis",
   components: {
     TweetLayout,
     ProfileLayout,
-    LinkLayout
+    LinkLayout,
+    WordsLayout
   },
   data() {
     return {};

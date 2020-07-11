@@ -7,7 +7,7 @@
         v-divider.ma-2(color="white")
       v-expansion-panels(v-model="this.panel" v-if="this.tweet.entities.urls.length > 0")
         v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls')
-          v-expansion-panel-header {{ url.expanded_url }}
+          v-expansion-panel-header {{ whois[u].WhoisRecord.domainName }}
           v-expansion-panel-content 
               div(v-if='isHTTPS(url.expanded_url)') 
                 v-icon.mdi.mdi-lock-check(color="success")
