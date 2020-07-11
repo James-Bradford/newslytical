@@ -1,5 +1,10 @@
 <template lang="pug">
-  div
+  v-card(color='accent')
+    v-card-title
+        v-icon(large='' left='' color='white') mdi-trending-up
+        span.title.font-weight-light.white--text Tends
+        
+      
 </template>
 
 <script>
@@ -10,10 +15,12 @@ export default {
     computed: {
         tweetWords() {
             return unique(this.$store.state.rawTweet.full_text);
-        }
+        },
     },
-    mounted() {
-        console.log(this.tweetWords);
+    created() {
+        for (let i = 0; i < this.tweetWords.length; i++) {
+
+        }
     }
 
 }
