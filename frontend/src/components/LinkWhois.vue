@@ -1,10 +1,12 @@
 <template lang="pug">
     v-card.pa-2.elevation-4(color="warning")
-      v-card-title.white--text.text-h4
+      v-card-title.pa-2.white--text.text-h4
         v-icon.mdi.mdi-link(color='white' x-large)
         | Whois Data
-      v-expansion-panels
-        v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls' :key='u')
+      v-card-text
+        v-divider.ma-2(color="white")
+      v-expansion-panels(v-model="this.panel" v-if="this.tweet.entities.urls.length > 0")
+        v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls')
           v-expansion-panel-header {{ url.expanded_url }}
           v-expansion-panel-content 
               div(v-if='isHTTPS(url.expanded_url)') 
@@ -28,8 +30,7 @@
               div(v-if='whois[u].WhoisRecord.registryData.createdDate !== undefined')
                 v-icon.mdi.mdi-clock
                 | Created: {{ whois[u].WhoisRecord.registryData.createdDate }}
-              
-             
+      div.pa-2.white--text.text-justify(v-else) We haven't detected any links in this Tweet.  If we've got it wrong and there are links, please think carefully before clicking them and use your own discretion.
 </template>
 
 <script>
@@ -39,6 +40,11 @@ var psl = require("psl");
 
 export default {
   name: "LinkWhois",
+  data() {
+    return {
+      panel: [0]
+    }
+  },
   props: {
     urls: [],
     whois: []
