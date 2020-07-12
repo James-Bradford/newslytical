@@ -64,12 +64,10 @@ var store = new _vuex["default"].Store({
 
     /**
      * Call API to load Tweet and highlight
-     * @param {*} param0 
+     * 
      * @param {*} id 
      */
-    loadTweet: function loadTweet(_ref2, id) {
-      var commit = _ref2.commit,
-          state = _ref2.state;
+    loadTweet: function loadTweet(id) {
       var self = this; //Make API call
 
       _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
@@ -93,14 +91,19 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
+
+    /**
+     * Call API to get Trends for US and UK
+     */
     loadTwitterTrends: function loadTwitterTrends() {
-      var self = this;
+      var self = this; // US Trends
 
       _Api["default"].get("twitter/trends/2459115").then(function (result) {
         self.commit('SAVE_TWITTER_TRENDS_US');
       })["catch"](function (error) {
         throw new Error("API ERROR");
-      });
+      }); // UK Trends
+
 
       _Api["default"].get("twitter/trends/44418").then(function (result) {
         self.commit('SAVE_TWITTER_TENDS_UK');
@@ -108,8 +111,12 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
-    setTab: function setTab(_ref3, tab) {
-      var commit = _ref3.commit;
+
+    /**
+     * Sets the tab to a specific value
+     * @param {*} tab 
+     */
+    setTab: function setTab(tab) {
       this.commit('SAVE_TAB', tab);
     }
   }

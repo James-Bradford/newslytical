@@ -19,9 +19,16 @@ const client = new Twitter({
 });
 
 // Get a Tweet by ID
-app.get('/api/twitter/:id', (req, res) => {
+app.get('/api/twitter/tweet/:id', (req, res) => {
     client.get(`statuses/show`, { id: req.params.id, tweet_mode: 'extended' }, function (error, tweet, response) {
         res.send(tweet);
+    });
+})
+
+// Get Twitter trends by location
+app.get('/api/twitter/trends/:id', (req, res) => {
+    client.get(`trends/place`, { id: req.params.id }, function (error, trends, response) {
+        res.send(trends);
     });
 })
 

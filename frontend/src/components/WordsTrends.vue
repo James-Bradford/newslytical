@@ -18,9 +18,9 @@ export default {
         },
     },
     created() {
-        for (let i = 0; i < this.tweetWords.length; i++) {
-
-        }
+        /*for (let i = 0; i < this.tweetWords.length; i++) {
+            
+        }*/
     }
 
 }
