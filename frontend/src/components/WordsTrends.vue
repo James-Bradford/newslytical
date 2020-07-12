@@ -17,11 +17,6 @@ export default {
             return unique(this.$store.state.rawTweet.full_text);
         },
     },
-    created() {
-        /*for (let i = 0; i < this.tweetWords.length; i++) {
-            
-        }*/
-    }
 
 }
 </script>

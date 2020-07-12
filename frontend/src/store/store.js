@@ -39,11 +39,11 @@ export const store = new Vuex.Store({
         * @param {*} param0 
         * @param {*} id 
         */
-        loadRawTweet({ commit, state }, id) {
+        loadRawTweet({commit}, id) {
             var self = this;
 
             //Make API call
-            Api.get(`twitter/${id}`)
+            Api.get(`twitter/tweet/${id}`)
                 .then(function (result) {
 
                     self.commit('SAVE_RAW_TWEET', result.data)
@@ -58,7 +58,7 @@ export const store = new Vuex.Store({
          * 
          * @param {*} id 
          */
-        loadTweet(id) {
+        loadTweet({commit}, id) {
             var self = this;
 
             //Make API call
@@ -90,7 +90,7 @@ export const store = new Vuex.Store({
         /**
          * Call API to get Trends for US and UK
          */
-        loadTwitterTrends() {
+        loadTwitterTrends({commit}) {
             var self = this;
 
             // US Trends

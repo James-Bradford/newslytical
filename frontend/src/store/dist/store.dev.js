@@ -51,11 +51,10 @@ var store = new _vuex["default"].Store({
     * @param {*} id 
     */
     loadRawTweet: function loadRawTweet(_ref, id) {
-      var commit = _ref.commit,
-          state = _ref.state;
+      var commit = _ref.commit;
       var self = this; //Make API call
 
-      _Api["default"].get("twitter/".concat(id)).then(function (result) {
+      _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
         self.commit('SAVE_RAW_TWEET', result.data); //Throw error if needed
       })["catch"](function (error) {
         throw new Error("API ERROR");
@@ -67,7 +66,8 @@ var store = new _vuex["default"].Store({
      * 
      * @param {*} id 
      */
-    loadTweet: function loadTweet(id) {
+    loadTweet: function loadTweet(_ref2, id) {
+      var commit = _ref2.commit;
       var self = this; //Make API call
 
       _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
@@ -95,7 +95,8 @@ var store = new _vuex["default"].Store({
     /**
      * Call API to get Trends for US and UK
      */
-    loadTwitterTrends: function loadTwitterTrends() {
+    loadTwitterTrends: function loadTwitterTrends(_ref3) {
+      var commit = _ref3.commit;
       var self = this; // US Trends
 
       _Api["default"].get("twitter/trends/2459115").then(function (result) {
