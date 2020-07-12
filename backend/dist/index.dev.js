@@ -31,7 +31,7 @@ app.get('/api/twitter/tweet/:id', function (req, res) {
   }, function (error, tweet, response) {
     res.send(tweet);
   });
-}); // Get a Tweet by ID
+}); // Get a trends for a given location
 
 app.get('/api/twitter/trends/:id', function (req, res) {
   client.get("trends/place", {

@@ -25,7 +25,7 @@ app.get('/api/twitter/tweet/:id', (req, res) => {
     });
 })
 
-// Get a Tweet by ID
+// Get a trends for a given location
 app.get('/api/twitter/trends/:id', (req, res) => {
     client.get(`trends/place`, { id: req.params.id }, function (error, trends, response) {
         res.send(trends);
