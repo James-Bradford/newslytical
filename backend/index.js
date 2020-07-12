@@ -25,6 +25,13 @@ app.get('/api/twitter/tweet/:id', (req, res) => {
     });
 })
 
+// Get a Tweet by ID
+app.get('/api/twitter/trends/:id', (req, res) => {
+    client.get(`trends/place`, { id: req.params.id }, function (error, trends, response) {
+        res.send(trends);
+    });
+})
+
 // Perform a whois lookup on a given domain
 app.get('/api/whois/:domain', (req, res) => {
     axios.get(`https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=${process.env.WHOIS_API_KEY}&outputFormat=JSON&domainName=${req.params.domain}`)

@@ -31,6 +31,14 @@ app.get('/api/twitter/tweet/:id', function (req, res) {
   }, function (error, tweet, response) {
     res.send(tweet);
   });
+}); // Get a Tweet by ID
+
+app.get('/api/twitter/trends/:id', function (req, res) {
+  client.get("trends/place", {
+    id: req.params.id
+  }, function (error, trends, response) {
+    res.send(trends);
+  });
 }); // Perform a whois lookup on a given domain
 
 app.get('/api/whois/:domain', function (req, res) {
