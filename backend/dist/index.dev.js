@@ -24,7 +24,7 @@ var client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 }); // Get a Tweet by ID
 
-app.get('/api/twitter/:id', function (req, res) {
+app.get('/api/twitter/tweet/:id', function (req, res) {
   client.get("statuses/show", {
     id: req.params.id,
     tweet_mode: 'extended'
