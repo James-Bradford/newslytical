@@ -55,10 +55,14 @@ export const store = new Vuex.Store({
         },
         /**
          * Call API to load Tweet and highlight
-         * 
+         * @param {*} param0 
          * @param {*} id 
          */
+<<<<<<< HEAD
         loadTweet({commit}, id) {
+=======
+        loadTweet({ commit, state }, id) {
+>>>>>>> parent of 12e08ca0... Fixed trends endpoint
             var self = this;
 
             //Make API call
@@ -87,21 +91,22 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
+<<<<<<< HEAD
         /**
          * Call API to get Trends for US and UK
          */
         loadTwitterTrends({commit}) {
+=======
+        loadTwitterTrends() {
+>>>>>>> parent of 12e08ca0... Fixed trends endpoint
             var self = this;
 
-            // US Trends
             Api.get(`twitter/trends/2459115`)
                 .then(function (result) {
                     self.commit('SAVE_TWITTER_TRENDS_US')
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });
-
-            // UK Trends
             Api.get(`twitter/trends/44418`)
                 .then(function (result) {
                     self.commit('SAVE_TWITTER_TENDS_UK')
@@ -109,11 +114,7 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
-        /**
-         * Sets the tab to a specific value
-         * @param {*} tab 
-         */
-        setTab(tab) {
+        setTab({ commit }, tab) {
             this.commit('SAVE_TAB', tab);
         }
     }
