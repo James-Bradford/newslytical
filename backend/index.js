@@ -47,7 +47,7 @@ app.get('/api/trends/daily/:geo', (req, res) => {
 
 // Get the interest over time for a given word
 app.get('/api/trends/interest/:word', (req, res) => {
-    googleTrends.dailyTrends({geo: req.params.word})
+    googleTrends.interestOverTime({keyword: req.params.word})
         .then(results => {
             res.send(results);
         })
@@ -58,7 +58,7 @@ app.get('/api/trends/interest/:word', (req, res) => {
 
 // Get related topics for a given word
 app.get('/api/trends/related/:word', (req, res) => {
-    googleTrends.dailyTrends({geo: req.params.word})
+    googleTrends.dailyTrends({keyword: req.params.word})
         .then(results => {
             res.send(results);
         })

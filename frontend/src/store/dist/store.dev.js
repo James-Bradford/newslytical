@@ -19,6 +19,8 @@ var store = new _vuex["default"].Store({
   state: {
     rawTweet: {},
     tweet: {},
+    twitterTrendsUS: {},
+    twitterTrendsUK: {},
     whois: [],
     tab: Number
   },
@@ -28,6 +30,12 @@ var store = new _vuex["default"].Store({
     },
     SAVE_TWEET: function SAVE_TWEET(state, tweet) {
       state.tweet = tweet;
+    },
+    SAVE_TWITTER_TRENDS_US: function SAVE_TWITTER_TRENDS_US(state, twitterTrends) {
+      state.twitterTrendsUS = twitterTrends;
+    },
+    SAVE_TWITTER_TRENDS_UK: function SAVE_TWITTER_TRENDS_UK(state, twitterTrends) {
+      state.twitterTrendsUK = twitterTrends;
     },
     SAVE_WHOIS: function SAVE_WHOIS(state, whois) {
       state.whois = whois;
@@ -64,7 +72,7 @@ var store = new _vuex["default"].Store({
           state = _ref2.state;
       var self = this; //Make API call
 
-      _Api["default"].get("twitter/".concat(id)).then(function (result) {
+      _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
         //Set variables
         var tweet = result.data;
         var urls = tweet.entities.urls;
@@ -81,6 +89,21 @@ var store = new _vuex["default"].Store({
 
 
         self.commit('SAVE_TWEET', tweet); //Throw error if needed
+      })["catch"](function (error) {
+        throw new Error("API ERROR");
+      });
+    },
+    loadTwitterTrends: function loadTwitterTrends() {
+      var self = this;
+
+      _Api["default"].get("twitter/trends/2459115").then(function (result) {
+        self.commit('SAVE_TWITTER_TRENDS_US');
+      })["catch"](function (error) {
+        throw new Error("API ERROR");
+      });
+
+      _Api["default"].get("twitter/trends/44418").then(function (result) {
+        self.commit('SAVE_TWITTER_TENDS_UK');
       })["catch"](function (error) {
         throw new Error("API ERROR");
       });

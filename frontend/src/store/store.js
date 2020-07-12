@@ -8,6 +8,8 @@ export const store = new Vuex.Store({
     state: {
         rawTweet: {},
         tweet: {},
+        twitterTrendsUS: {},
+        twitterTrendsUK: {},
         whois: [],
         tab: Number
     },
@@ -18,6 +20,12 @@ export const store = new Vuex.Store({
         SAVE_TWEET(state, tweet) {
             state.tweet = tweet;
         },
+        SAVE_TWITTER_TRENDS_US(state, twitterTrends) {
+            state.twitterTrendsUS = twitterTrends;
+        },
+        SAVE_TWITTER_TRENDS_UK(state, twitterTrends) {
+            state.twitterTrendsUK = twitterTrends;
+        },
         SAVE_WHOIS(state, whois) {
             state.whois = whois;
         },
@@ -27,10 +35,10 @@ export const store = new Vuex.Store({
     },
     actions: {
         /**
- * Call API to load Tweet and highlight
- * @param {*} param0 
- * @param {*} id 
- */
+        * Call API to load Tweet and highlight
+        * @param {*} param0 
+        * @param {*} id 
+        */
         loadRawTweet({ commit, state }, id) {
             var self = this;
 
@@ -54,7 +62,7 @@ export const store = new Vuex.Store({
             var self = this;
 
             //Make API call
-            Api.get(`twitter/${id}`)
+            Api.get(`twitter/tweet/${id}`)
                 .then(function (result) {
                     //Set variables
                     var tweet = result.data;
@@ -75,6 +83,22 @@ export const store = new Vuex.Store({
                     self.commit('SAVE_TWEET', tweet)
 
                     //Throw error if needed
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+        },
+        loadTwitterTrends() {
+            var self = this;
+
+            Api.get(`twitter/trends/2459115`)
+                .then(function (result) {
+                    self.commit('SAVE_TWITTER_TRENDS_US')
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+            Api.get(`twitter/trends/44418`)
+                .then(function (result) {
+                    self.commit('SAVE_TWITTER_TENDS_UK')
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });

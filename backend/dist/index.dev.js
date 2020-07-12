@@ -52,8 +52,8 @@ app.get('/api/trends/daily/:geo', function (req, res) {
 }); // Get the interest over time for a given word
 
 app.get('/api/trends/interest/:word', function (req, res) {
-  googleTrends.dailyTrends({
-    geo: req.params.word
+  googleTrends.interestOverTime({
+    keyword: req.params.word
   }).then(function (results) {
     res.send(results);
   })["catch"](function (err) {
@@ -63,7 +63,7 @@ app.get('/api/trends/interest/:word', function (req, res) {
 
 app.get('/api/trends/related/:word', function (req, res) {
   googleTrends.dailyTrends({
-    geo: req.params.word
+    keyword: req.params.word
   }).then(function (results) {
     res.send(results);
   })["catch"](function (err) {
