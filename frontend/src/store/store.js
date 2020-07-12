@@ -58,11 +58,7 @@ export const store = new Vuex.Store({
          * @param {*} param0 
          * @param {*} id 
          */
-<<<<<<< HEAD
-        loadTweet({commit}, id) {
-=======
         loadTweet({ commit, state }, id) {
->>>>>>> parent of 12e08ca0... Fixed trends endpoint
             var self = this;
 
             //Make API call
@@ -91,14 +87,7 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
-<<<<<<< HEAD
-        /**
-         * Call API to get Trends for US and UK
-         */
-        loadTwitterTrends({commit}) {
-=======
         loadTwitterTrends() {
->>>>>>> parent of 12e08ca0... Fixed trends endpoint
             var self = this;
 
             Api.get(`twitter/trends/2459115`)

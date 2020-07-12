@@ -17,14 +17,7 @@ export default {
             return unique(this.$store.state.rawTweet.full_text);
         },
     },
-<<<<<<< HEAD
-=======
-    created() {
-        for (let i = 0; i < this.tweetWords.length; i++) {
 
-        }
-    }
->>>>>>> parent of 12e08ca0... Fixed trends endpoint
 
 }
 </script>
