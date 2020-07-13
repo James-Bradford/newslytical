@@ -17,8 +17,7 @@ div
       link-layout
 
     // Words Tab
-    v-tab-item(:key='4')
-      v-container
+    v-tab-item.fill-height(:key='4')
         words-layout
 
     v-tab-item(:key='5')
@@ -41,8 +40,8 @@ div
       | Links
       v-icon mdi-link
     v-tab(:key='4')
-      | Words
-      v-icon mdi-cursor-text
+      | Trends
+      v-icon mdi-trending-up
     v-tab(:key='5')
       | Media
       v-icon mdi-image

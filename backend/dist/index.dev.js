@@ -70,7 +70,7 @@ app.get('/api/trends/interest/:word', function (req, res) {
 }); // Get related topics for a given word
 
 app.get('/api/trends/related/:word', function (req, res) {
-  googleTrends.dailyTrends({
+  googleTrends.relatedTopics({
     keyword: req.params.word
   }).then(function (results) {
     res.send(results);

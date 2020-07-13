@@ -27,9 +27,11 @@ app.get('/api/twitter/tweet/:id', (req, res) => {
 
 // Get a trends for a given location
 app.get('/api/twitter/trends/:id', (req, res) => {
+
     client.get(`trends/place`, { id: req.params.id }, function (error, trends, response) {
         res.send(trends);
     });
+
 })
 
 // Perform a whois lookup on a given domain
@@ -65,7 +67,7 @@ app.get('/api/trends/interest/:word', (req, res) => {
 
 // Get related topics for a given word
 app.get('/api/trends/related/:word', (req, res) => {
-    googleTrends.dailyTrends({keyword: req.params.word})
+    googleTrends.relatedTopics({keyword: req.params.word})
         .then(results => {
             res.send(results);
         })

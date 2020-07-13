@@ -2,21 +2,22 @@
   v-card(color='accent')
     v-card-title
         v-icon(large='' left='' color='white') mdi-trending-up
-        span.title.font-weight-light.white--text Tends
+        span.title.font-weight-light.white--text Twitter Trends
+    v-card-text
+        trend-info(@trend-select="$emit('trend-select', $event)")
         
       
 </template>
 
 <script>
-const unique = require('unique-words');
+import TrendInfo from '../components/TrendInfo';
 
 export default {
     name: 'WordsTrends',
-    computed: {
-        tweetWords() {
-            return unique(this.$store.state.rawTweet.full_text);
-        },
+    components: {
+        TrendInfo
     },
+
 
 
 }

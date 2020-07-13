@@ -21,6 +21,8 @@ export default {
     this.isLoading = true;
     this.$store.dispatch("loadRawTweet", this.$route.params.id);
     this.$store.dispatch("loadTweet", this.$route.params.id);
+    this.$store.dispatch("loadTwitterTrendsUS");
+    this.$store.dispatch("loadTwitterTrendsUK");
     this.isLoading = false;
   }
 };

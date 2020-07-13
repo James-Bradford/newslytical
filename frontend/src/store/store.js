@@ -8,8 +8,8 @@ export const store = new Vuex.Store({
     state: {
         rawTweet: {},
         tweet: {},
-        twitterTrendsUS: {},
-        twitterTrendsUK: {},
+        twitterTrendsUS: [],
+        twitterTrendsUK: [],
         whois: [],
         tab: Number
     },
@@ -20,11 +20,11 @@ export const store = new Vuex.Store({
         SAVE_TWEET(state, tweet) {
             state.tweet = tweet;
         },
-        SAVE_TWITTER_TRENDS_US(state, twitterTrends) {
-            state.twitterTrendsUS = twitterTrends;
+        SAVE_TWITTER_TRENDS_US(state, twitterTrendsUS) {
+            state.twitterTrendsUS = twitterTrendsUS;
         },
-        SAVE_TWITTER_TRENDS_UK(state, twitterTrends) {
-            state.twitterTrendsUK = twitterTrends;
+        SAVE_TWITTER_TRENDS_UK(state, twitterTrendsUK) {
+            state.twitterTrendsUK = twitterTrendsUK;
         },
         SAVE_WHOIS(state, whois) {
             state.whois = whois;
@@ -39,7 +39,7 @@ export const store = new Vuex.Store({
         * @param {*} param0 
         * @param {*} id 
         */
-        loadRawTweet({commit}, id) {
+        loadRawTweet({ commit }, id) {
             var self = this;
 
             //Make API call
@@ -87,18 +87,22 @@ export const store = new Vuex.Store({
                     throw new Error("API ERROR");
                 });
         },
-        loadTwitterTrends() {
+        loadTwitterTrendsUK() {
+            var self = this;
+
+            Api.get(`twitter/trends/44418`)
+                .then(function (result) {
+                    self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+        },
+        loadTwitterTrendsUS() {
             var self = this;
 
             Api.get(`twitter/trends/2459115`)
                 .then(function (result) {
-                    self.commit('SAVE_TWITTER_TRENDS_US')
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-            Api.get(`twitter/trends/44418`)
-                .then(function (result) {
-                    self.commit('SAVE_TWITTER_TENDS_UK')
+                    self.commit('SAVE_TWITTER_TRENDS_US', result.data);
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });
