@@ -11,12 +11,18 @@ var _vueRouter = _interopRequireDefault(require("vue-router"));
 
 var _Analysis = _interopRequireDefault(require("./views/Analysis.vue"));
 
+var _Home = _interopRequireDefault(require("./views/Home.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
 
 var _default = new _vueRouter["default"]({
   routes: [{
+    path: '/',
+    name: 'home',
+    component: _Home["default"]
+  }, {
     path: '/analysis/:id',
     name: 'analysis',
     component: _Analysis["default"]

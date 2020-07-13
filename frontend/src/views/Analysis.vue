@@ -1,5 +1,7 @@
 <template lang="pug">
 div
+  v-overlay(v-if='isLoading')
+    v-progress-circular(indeterminate='' color='primary' size='200' v-if='isLoading')
   // Tab Content Start
   v-tabs-items.tab-background.fill-height(v-model='tab')
     router-view
@@ -67,7 +69,17 @@ export default {
     WordsLayout
   },
   data() {
-    return {};
+    return {
+      isLoading: false,
+    };
+  },
+  created() {
+    this.isLoading = true;
+    this.$store.dispatch("loadRawTweet", this.$route.params.id);
+    this.$store.dispatch("loadTweet", this.$route.params.id);
+    this.$store.dispatch("loadTwitterTrendsUS");
+    this.$store.dispatch("loadTwitterTrendsUK");
+    this.isLoading = false;
   },
   computed: {
     tweet() {
@@ -81,7 +93,7 @@ export default {
         this.$store.dispatch("setTab", tab);
       }
     }
-  },
+  }
 };
 </script>
 
