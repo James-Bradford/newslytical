@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import TrendInfo from '../components/TrendInfo';
+import TrendsInfo from '../components/TrendsInfo';
 
 export default {
-    name: 'WordsTrends',
+    name: 'TrendsOther',
     components: {
-        TrendInfo
+        TrendsInfo
     },
 
 

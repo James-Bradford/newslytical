@@ -2,8 +2,8 @@
     v-container.px-lg-16.fill-height
       v-row.px-lg-16.fill-height(justify='center' align='center')
         v-col(cols='12' md='5')
-          words-trends(@trend-select="selectTrend($event)")
-          related-topics.mt-2(:related-topics="relatedTopics")
+          trends-words(@trend-select="selectTrend($event)")
+          trends-other.mt-2(:related-topics="relatedTopics")
         v-col(cols='12' md='7')
           div.text-body.font-weight-regular.text-justify 
             | Trending topics can be a big source of misinformation.
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import WordsTrends from "./WordsTrends";
-import RelatedTopics from "./RelatedTopics";
+import TrendsWords from "./TrendsWords";
+import TrendsOther from "./TrendsOther";
 import Api from "../services/Api";
 
 export default {
@@ -38,8 +38,8 @@ export default {
     }
   },
   components: {
-    WordsTrends,
-    RelatedTopics
+    TrendsWords,
+    TrendsOther
   }
 };
 </script>

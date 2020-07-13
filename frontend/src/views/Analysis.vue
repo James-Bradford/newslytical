@@ -18,9 +18,9 @@ div
     v-tab-item.fill-height(:key='3')
       link-layout
 
-    // Words Tab
+    // Trends Tab
     v-tab-item.fill-height(:key='4')
-        words-layout
+        trends-layout
 
     v-tab-item(:key='5')
       v-container
@@ -58,7 +58,7 @@ div
 import TweetLayout from "../components/TweetLayout";
 import LinkLayout from "../components/LinkLayout";
 import ProfileLayout from "../components/ProfileLayout";
-import WordsLayout from "../components/WordsLayout";
+import TrendsLayout from "../components/TrendsLayout";
 
 export default {
   name: "Analysis",
@@ -66,7 +66,7 @@ export default {
     TweetLayout,
     ProfileLayout,
     LinkLayout,
-    WordsLayout
+    TrendsLayout
   },
   data() {
     return {
