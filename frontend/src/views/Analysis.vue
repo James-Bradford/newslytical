@@ -26,7 +26,7 @@ div
       trends-layout
 
     //Media Tab
-    v-tab-item(:key='5')
+    v-tab-item.fill-height(:key='5')
       media-layout
 
     v-tab-item(:key='6')
