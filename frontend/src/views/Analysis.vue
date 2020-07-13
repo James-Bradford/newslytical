@@ -1,7 +1,10 @@
 <template lang="pug">
 div
+
+  //Loading Overlay
   v-overlay(v-if='isLoading')
     v-progress-circular(indeterminate='' color='primary' size='200' v-if='isLoading')
+
   // Tab Content Start
   v-tabs-items.tab-background.fill-height(v-model='tab')
     router-view
@@ -12,7 +15,7 @@ div
 
     // Profile Tab
     v-tab-item.fill-height(:key='2')
-        profile-layout
+      profile-layout
 
     // Link Tab
     v-tab-item.fill-height(:key='3')
@@ -20,11 +23,12 @@ div
 
     // Trends Tab
     v-tab-item.fill-height(:key='4')
-        trends-layout
+      trends-layout
 
+    //Media Tab
     v-tab-item(:key='5')
-      v-container
-        h1 Media
+      media-layout
+
     v-tab-item(:key='6')
       v-container
         h1 Summary
@@ -59,6 +63,7 @@ import TweetLayout from "../components/TweetLayout";
 import LinkLayout from "../components/LinkLayout";
 import ProfileLayout from "../components/ProfileLayout";
 import TrendsLayout from "../components/TrendsLayout";
+import MediaLayout from "../components/MediaLayout";
 
 export default {
   name: "Analysis",
@@ -66,14 +71,16 @@ export default {
     TweetLayout,
     ProfileLayout,
     LinkLayout,
-    TrendsLayout
+    TrendsLayout,
+    MediaLayout
   },
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   created() {
+    //Set loading variable, load VueX states
     this.isLoading = true;
     this.$store.dispatch("loadRawTweet", this.$route.params.id);
     this.$store.dispatch("loadTweet", this.$route.params.id);
@@ -82,9 +89,12 @@ export default {
     this.isLoading = false;
   },
   computed: {
+    //Tweet object returned from VueX state
     tweet() {
       return this.$store.state.tweet;
     },
+
+    //Tab number returned from VueX state
     tab: {
       get: function() {
         return this.$store.state.tab;

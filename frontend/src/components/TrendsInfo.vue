@@ -8,7 +8,7 @@ div
 const unique = require("unique-words");
 
 export default {
-  name: "TrendInfo",
+  name: "TrendsInfo",
   components: {
     commonWords: []
   },
