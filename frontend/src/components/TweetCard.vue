@@ -34,7 +34,6 @@ export default {
     tabChange(tab) {
       this.tab = tab;
       console.log(tab);
-      alert("poo!");
     }
   },
   computed: {
