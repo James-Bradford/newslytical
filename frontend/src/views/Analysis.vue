@@ -3,7 +3,7 @@ div
 
   //Loading Overlay
   v-overlay(v-if='isLoading')
-    v-progress-circular(indeterminate='' color='primary' size='200' v-if='isLoading')
+    v-progress-circular(indeterminate='' color='primary' size='200')
 
   // Tab Content Start
   v-tabs-items.tab-background.fill-height(v-model='tab')
@@ -76,12 +76,11 @@ export default {
   },
   data() {
     return {
-      isLoading: false
+      isLoading: true
     };
   },
   created() {
     //Set loading variable, load VueX states
-    this.isLoading = true;
     this.$store.dispatch("loadRawTweet", this.$route.params.id);
     this.$store.dispatch("loadTweet", this.$route.params.id);
     this.$store.dispatch("loadTwitterTrendsUS");

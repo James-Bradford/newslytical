@@ -11,6 +11,8 @@ var _vuex = _interopRequireDefault(require("vuex"));
 
 var _Api = _interopRequireDefault(require("../services/Api"));
 
+var _psl = _interopRequireDefault(require("psl"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
@@ -21,7 +23,7 @@ var store = new _vuex["default"].Store({
     tweet: {},
     twitterTrendsUS: [],
     twitterTrendsUK: [],
-    whois: [],
+    whois: null,
     tab: Number
   },
   mutations: {
@@ -69,12 +71,15 @@ var store = new _vuex["default"].Store({
     loadTweet: function loadTweet(_ref2, id) {
       var commit = _ref2.commit,
           state = _ref2.state;
-      var self = this; //Make API call
+      var self = this;
+      var tweet = {};
+      var urls = [];
+      var whois = []; //Make API call
 
       _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
         //Set variables
-        var tweet = result.data;
-        var urls = tweet.entities.urls;
+        tweet = result.data;
+        urls = tweet.entities.urls;
         var hashtags = tweet.entities.hashtags; //For each URL, replace it with highlighted version
 
         for (var i in urls) {
@@ -90,7 +95,36 @@ var store = new _vuex["default"].Store({
         self.commit('SAVE_TWEET', tweet); //Throw error if needed
       })["catch"](function (error) {
         throw new Error("API ERROR");
-      });
+      }); //Performs whois on each hostname in Tweet
+
+
+      for (var i = 0; i < urls.length; i++) {
+        var hostname; //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("//") > -1) {
+          hostname = url.split("/")[2];
+        } else {
+          hostname = url.split("/")[0];
+        } //find & remove port number
+
+
+        hostname = hostname.split(":")[0]; //find & remove "?"
+
+        hostname = hostname.split("?")[0]; //Extract hostname
+
+        var url = _psl["default"].get(hostname); //Make API call
+
+
+        _Api["default"].get("whois/".concat(url)).then(function (result) {
+          //Add result to array
+          whois.push(result.data);
+        })["catch"](function (error) {
+          throw new Error("API ERROR");
+        });
+      } //Assign local variable
+
+
+      this.commit('SAVE_WHOIS', whois);
     },
     loadTwitterTrendsUK: function loadTwitterTrendsUK() {
       var self = this;

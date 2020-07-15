@@ -1,7 +1,7 @@
 <template lang="pug">
 div.fill-height
   v-row.fill-height(align="center" justify="center")
-    v-col(cols="8")
+    v-col(cols="11" md="8")
       v-card(color="accent")
         v-card-title.white--text Analyse a Tweet
         v-card-text

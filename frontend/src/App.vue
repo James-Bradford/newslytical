@@ -2,7 +2,7 @@
   v-app(style="height: calc(100vh);")
     v-main
        nav-bar
-       router-view(v-if='!isLoading' class="fill-height" style="padding-top: 100px; padding-bottom: 100px")
+       router-view(class="fill-height" style="padding-top: 100px; padding-bottom: 100px")
 </template>
 
 <script>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Api from '../services/Api'
+import psl from "psl";
 
 Vue.use(Vuex)
 
@@ -10,7 +11,7 @@ export const store = new Vuex.Store({
         tweet: {},
         twitterTrendsUS: [],
         twitterTrendsUK: [],
-        whois: [],
+        whois: null,
         tab: Number
     },
     mutations: {
@@ -60,13 +61,16 @@ export const store = new Vuex.Store({
          */
         loadTweet({ commit, state }, id) {
             var self = this;
+            var tweet = {};
+            var urls = [];
+            var whois = [];
 
             //Make API call
             Api.get(`twitter/tweet/${id}`)
                 .then(function (result) {
                     //Set variables
-                    var tweet = result.data;
-                    const urls = tweet.entities.urls;
+                    tweet = result.data;
+                    urls = tweet.entities.urls;
                     const hashtags = tweet.entities.hashtags;
 
                     //For each URL, replace it with highlighted version
@@ -86,29 +90,64 @@ export const store = new Vuex.Store({
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });
-        },
-        loadTwitterTrendsUK() {
-            var self = this;
 
-            Api.get(`twitter/trends/44418`)
-                .then(function (result) {
-                    self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-        },
-        loadTwitterTrendsUS() {
-            var self = this;
+            //Performs whois on each hostname in Tweet
+            for (let i = 0; i < urls.length; i++) {
 
-            Api.get(`twitter/trends/2459115`)
-                .then(function (result) {
-                    self.commit('SAVE_TWITTER_TRENDS_US', result.data);
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-        },
-        setTab({ commit }, tab) {
-            this.commit('SAVE_TAB', tab);
+                var hostname;
+                //find & remove protocol (http, ftp, etc.) and get hostname
+
+                if (url.indexOf("//") > -1) {
+                    hostname = url.split("/")[2];
+                } else {
+                    hostname = url.split("/")[0];
+                }
+
+                //find & remove port number
+                hostname = hostname.split(":")[0];
+                //find & remove "?"
+                hostname = hostname.split("?")[0];
+
+                //Extract hostname
+                var url = psl.get(hostname);
+
+                //Make API call
+                Api.get(`whois/${url}`)
+                    .then(function (result) {
+
+                        //Add result to array
+                        whois.push(result.data);
+                    })
+                    .catch(error => {
+                        throw new Error("API ERROR");
+                    });
+                }
+
+                //Assign local variable
+                this.commit('SAVE_WHOIS', whois);
+            },
+            loadTwitterTrendsUK() {
+                var self = this;
+
+                Api.get(`twitter/trends/44418`)
+                    .then(function (result) {
+                        self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
+                    }).catch(error => {
+                        throw new Error("API ERROR");
+                    });
+            },
+            loadTwitterTrendsUS() {
+                var self = this;
+
+                Api.get(`twitter/trends/2459115`)
+                    .then(function (result) {
+                        self.commit('SAVE_TWITTER_TRENDS_US', result.data);
+                    }).catch(error => {
+                        throw new Error("API ERROR");
+                    });
+            },
+            setTab({ commit }, tab) {
+                this.commit('SAVE_TAB', tab);
+            }
         }
-    }
-});
+    });
