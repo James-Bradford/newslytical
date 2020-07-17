@@ -12,16 +12,16 @@ v-card(color='success rounded-lg')
       |         @{{ this.tweet.user.screen_name }}
     .text-body-1.white--text
       b Followers
-      |         {{ this.tweet.user.followers_count }}
+      |         {{ this.followers_count }}
     .text-body-1.white--text
       b Following
-      |         {{ this.tweet.user.friends_count }}
+      |         {{ this.friends_count }}
     .text-body-1.white--text
       b Posts
-      |         {{ this.tweet.user.statuses_count }}
+      |         {{ this.statuses_count }}
     .text-body-1.white--text
-      b Creation Date
-      |         {{ this.tweet.user.created_at }}
+      b Account Age
+      |         {{ this.account_age }}
 </template>
 
 <script>
@@ -30,6 +30,31 @@ export default {
   computed: {
     tweet() {
       return this.$store.state.tweet;
+    },
+    followers_count() {
+      return this.formatNumber(this.$store.state.tweet.user.followers_count)
+    },
+    friends_count() {
+      return this.formatNumber(this.$store.state.tweet.user.friends_count)
+    },
+    statuses_count() {
+      return this.formatNumber(this.$store.state.tweet.user.statuses_count)
+    },
+    account_age() {
+      var creationDate = new Date(this.$store.state.tweet.user.statuses_count);
+      var now = new Date();
+      var accountAge = (now-creationDate) / (1000 * 3600 * 24);
+
+      if (accountAge > 365) {
+        return Math.round(accountAge/365) + " Years";
+      } else {
+        return Math.round(accountAge) + " Days"
+      }
+    }
+  },
+  methods: {
+    formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
   }
 };
