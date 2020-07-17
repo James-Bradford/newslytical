@@ -45,7 +45,7 @@ export default {
           icon: "mdi-image-search-outline",
           subtitle: "Reverse Image Search",
           description:
-            "In some cases, misinformation can take the form of edited images. Images can be taken out of context causing people to misunderstand the meaning behind it.  A reverse image search will lookup similar images on the internet so that you can better understand the origin.</br></br><quote>This will be a research quote when I get around to adding it</quote>"
+            "In some cases, misinformation can take the form of edited images. Images can be taken out of context causing people to misunderstand the meaning behind it.  A reverse image search will lookup similar images on the internet so that you can better understand the origin.</br></br><blockquote>Manipulation of images has become an increasingly common occurrence with the advent of digital photos, power- ful image manipulation software, and knowledge of techniques. Effects may range from simple to complex. Simple adjustments can include increasing color saturation and removing minor elements. More-invasive changes can include removing or inserting a person into an image.</blockquote>"
         }
       ]
     };

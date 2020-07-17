@@ -22,17 +22,18 @@ export default {
 </script>
 
 <style>
-quote {
-  border-left: 3px solid grey;
+blockquote {
+  border-left: 5px solid var(--v-info-darken1);;
   padding: 5px;
   font-style: italic;
   quotes: '"' '"';
+  font-size: 0.8em;
 }
-quote:before {
+blockquote:before {
   content: open-quote;
 }
 
-quote:after {
+blockquote:after {
   content: close-quote;
 }
 </style>

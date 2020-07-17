@@ -1,12 +1,12 @@
 <template lang="pug">
-div
+div.fill-height
 
   //Loading Overlay
   v-overlay(v-if='isLoading')
     v-progress-circular(indeterminate='' color='primary' size='200')
 
   // Tab Content Start
-  v-tabs-items.tab-background.fill-height(v-model='tab')
+  v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model='tab')
     router-view
     
     // Tweet Tab
@@ -34,7 +34,7 @@ div
         h1 Summary
 
   // Tab Buttons
-  v-tabs(v-model='tab' icons-and-text='' style='position: fixed; bottom: 0; left: 0; width: 100%' center-active='' centered='' grow='')
+  v-tabs(v-model='tab' icons-and-text='' style='position: fixed; bottom: 0; left: 0; width: 100%; z-index: 5' center-active='' centered='' grow='')
     v-tabs-slider
     v-tab(:key='1')
       | Tweet

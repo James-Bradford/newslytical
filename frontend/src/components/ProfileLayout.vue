@@ -32,13 +32,13 @@ export default {
           icon: "mdi-account-multiple-outline",
           subtitle: "Followers",
           description:
-            "Research has shown accounts with a higher follower count are more likely to share real news. Their popularity with followers is an indicator of the trustworthiness of their content."
+            "Research has shown accounts with a higher follower count are more likely to share real news. Their popularity with followers is an indicator of the trustworthiness of their content.</br></br><blockquote>1) U (f ) includes more users that with TFF < 1, indicating less followers than followings; 2) U(r) consistently has more users with T F F > 1, indicating users trust real news are more likely to be more popular.</blockquote>"
         },
         {
           icon: "mdi-send",
           subtitle: "Posts",
           description:
-            "A study revealed that people considered to be extraverts and agreeable are more likely to share real news.  People that post more actively on Twitter may be more extraverted and therefore may share content that is more trustworthy."
+            "A study revealed that people considered to be extraverts and agreeable are more likely to share real news.  People that post more actively on Twitter may be more extraverted and therefore may share content that is more trustworthy. </br></br><blockquote>1) The users in U(f) generally publish fewer posts that users in U(r), which indicates those users trusting more real news are more likely to be active and express themselves; 2) The users in U (f ) tends to express more “favor” actions to tweets posted by other users, indicating their willingness to reach out to other users.</blockquote>"
         },
         {
           icon: "mdi-account-multiple-outline",
