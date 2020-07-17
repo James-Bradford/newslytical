@@ -13,12 +13,8 @@
                     v-carousel(height="100%" hide-delimiter-background='' show-arrows-on-hover='')
                         media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
 
-        
-
-                                
-
             v-col(cols='12' md='7')
-              info-steps
+              info-steps(color="purple" :steps="steps")
 
 
         v-row.fill-height(justify='center' align='center' v-else)
@@ -36,11 +32,23 @@ export default {
     //Tweet object returned from VueX state
     tweet() {
       return this.$store.state.tweet;
-    },
+    }
   },
   components: {
-      MediaCarousel,
-      InfoSteps
+    MediaCarousel,
+    InfoSteps
+  },
+  data() {
+    return {
+      steps: [
+        {
+          icon: "mdi-image-search-outline",
+          subtitle: "Reverse Image Search",
+          description:
+            "In some cases, misinformation can take the form of edited images. Images can be taken out of context causing people to misunderstand the meaning behind it.  A reverse image search will lookup similar images on the internet so that you can better understand the origin.</br></br><quote>This will be a research quote when I get around to adding it</quote>"
+        }
+      ]
+    };
   }
 };
 </script>
