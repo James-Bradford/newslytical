@@ -8,7 +8,7 @@
                 v-card.pa-1(color="purple")
                     v-card-title.white--text.text-h5 
                         v-icon(color="white") mdi-image
-                        |Tweet Media
+                        | Images
                 
                     v-carousel(height="100%" hide-delimiter-background='' show-arrows-on-hover='')
                         media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
@@ -18,6 +18,8 @@
                                 
 
             v-col(cols='12' md='7')
+              info-steps
+
 
         v-row.fill-height(justify='center' align='center' v-else)
             |This Tweet has no images to display.
@@ -26,6 +28,7 @@
 
 <script>
 import MediaCarousel from "./MediaCarousel";
+import InfoSteps from "./InfoSteps";
 
 export default {
   name: "MediaLayout",
@@ -37,6 +40,7 @@ export default {
   },
   components: {
       MediaCarousel,
+      InfoSteps
   }
 };
 </script>

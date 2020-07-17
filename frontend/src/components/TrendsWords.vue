@@ -4,7 +4,7 @@
         v-icon(large='' left='' color='white') mdi-trending-up
         span.title.font-weight-light.white--text Twitter Trends
     v-card-text
-        trend-info(@trend-select="$emit('trend-select', $event)")
+        trends-info(@trend-select="$emit('trend-select', $event)")
         
       
 </template>

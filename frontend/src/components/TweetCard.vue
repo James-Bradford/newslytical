@@ -11,7 +11,7 @@ v-card#tweet-card.mx-auto.pa-6.rounded-lg.elevated-4
   v-card-actions
     v-list-item.grow
       v-list-item-avatar(color='grey darken-3')
-        v-img.elevation-6(:src='this.tweet.user.profile_image_url')
+        img.elevation-6(:src="tweet.user.profile_image_url")
       v-list-item-content
         v-list-item-title.white--text {{ this.tweet.user.name }}
       v-row(align='center' justify='end')
@@ -26,7 +26,6 @@ v-card#tweet-card.mx-auto.pa-6.rounded-lg.elevated-4
 <script>
 export default {
   name: "TweetCard",
-  props: {},
   methods: {
     formatNumber(num) {
       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -34,7 +33,7 @@ export default {
     tabChange(tab) {
       this.tab = tab;
       console.log(tab);
-    }
+    },
   },
   computed: {
     tweet() {
@@ -47,7 +46,7 @@ export default {
       set: function(tab) {
         this.$store.dispatch("setTab", tab);
       }
-    }
+    },
   },
 
 
