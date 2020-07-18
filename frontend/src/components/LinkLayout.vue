@@ -14,7 +14,6 @@ import LinkWhois from "./LinkWhois";
 import LinkCard from "./LinkCard";
 import InfoSteps from "./InfoSteps";
 
-
 export default {
   name: "LinkLayout",
   components: {
@@ -27,27 +26,19 @@ export default {
         {
           icon: "mdi-lock",
           subtitle: "HTTPS Encryption",
-          description:
-            "Some accounts will attempt to deceive users by impersonating a legitimate news account.  Check the website of the company or person this account claims to represent to see if it matches their official screen name."
+          description: "<blockquote>Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which is the primary protocol used to send data between a web browser and a website. HTTPS is encrypted in order to increase security of data transfer. This is particularly important when users transmit sensitive data, such as by logging into a bank account, email service, or health insurance provider.  Any website, especially those that require login credentials, should use HTTPS. In modern web browsers such as Chrome, websites that do not use HTTPS are marked differently than those that are. Look for a green padlock in the URL bar to signify the webpage is secure. </blockquote></br><div class='reference'>Cloudflare. What is HTTPS?. Available: https://www.cloudflare.com/learning/ssl/what-is-https. Last accessed 18th Jul 2020.</div>"
         },
         {
           icon: "mdi-clipboard-account-outline",
           subtitle: "Registrant Information",
-          description:
-            "Research has shown accounts with a higher follower count are more likely to share real news. Their popularity with followers is an indicator of the trustworthiness of their content.</br></br><blockquote>1) U (f ) includes more users that with TFF < 1, indicating less followers than followings; 2) U(r) consistently has more users with T F F > 1, indicating users trust real news are more likely to be more popular.</blockquote>"
+          description: "Sometimes websites are created to mimic popular media outlets or other companies.  This is often to try and gain revenue from traffic to their website.  The Whois data will show what company originally registered the domain and in which country.  Although this is not available for all domains due to data protection, it's important to check if the registering company is consistent with the company the website claims to be."
         },
         {
-          icon: "mdi-send",
-          subtitle: "Posts",
+          icon: "mdi-calendar",
+          subtitle: "Created Date",
           description:
             "A study revealed that people considered to be extraverts and agreeable are more likely to share real news.  People that post more actively on Twitter may be more extraverted and therefore may share content that is more trustworthy. </br></br><blockquote>1) The users in U(f) generally publish fewer posts that users in U(r), which indicates those users trusting more real news are more likely to be active and express themselves; 2) The users in U (f ) tends to express more “favor” actions to tweets posted by other users, indicating their willingness to reach out to other users.</blockquote>"
         },
-        {
-          icon: "mdi-account-multiple-outline",
-          subtitle: "Account Age",
-          description:
-            "Sometimes accounts are created with the only intent of sharing misinformation.  This is particularly common during a big event such as an election where they will attempt to sway public opinion.  As a general rule, older accounts are more trustworthy."
-        }
       ]
     };
   },

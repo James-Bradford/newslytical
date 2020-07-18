@@ -36,4 +36,7 @@ blockquote:before {
 blockquote:after {
   content: close-quote;
 }
+.reference {
+  font-size: 0.8em;
+}
 </style>

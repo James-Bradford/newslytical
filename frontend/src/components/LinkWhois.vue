@@ -31,6 +31,8 @@
               div(v-if='whois[u].WhoisRecord.registryData.createdDate !== undefined')
                 v-icon.mdi.mdi-clock
                 | Created: {{ whois[u].WhoisRecord.registryData.createdDate }}
+             
+              
       div.pa-2.white--text.text-justify(v-else) We haven't detected any links in this Tweet.  If we've got it wrong and there are links, please think carefully before clicking them and use your own discretion.
 </template>
 
@@ -56,7 +58,7 @@ export default {
       if (url.match(/^[^:]+/) == "https") {
         return true
       } else { return false }
-    }
+    },
   },
 };
 </script>
