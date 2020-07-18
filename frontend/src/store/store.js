@@ -41,13 +41,12 @@ export const store = new Vuex.Store({
         * @param {*} id 
         */
         loadRawTweet({ commit }, id) {
-            var self = this;
 
             //Make API call
             Api.get(`twitter/tweet/${id}`)
                 .then(function (result) {
 
-                    self.commit('SAVE_RAW_TWEET', result.data)
+                    commit('SAVE_RAW_TWEET', result.data)
 
                     //Throw error if needed
                 }).catch(error => {

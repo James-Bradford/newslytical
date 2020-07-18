@@ -86,8 +86,6 @@ export default {
     this.$store.dispatch("loadTwitterTrendsUS");
     this.$store.dispatch("loadTwitterTrendsUK");
     this.isLoading = false;
-
-    console.log(this.whois);
   },
   computed: {
     //Tweet object returned from VueX state

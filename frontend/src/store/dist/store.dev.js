@@ -54,10 +54,10 @@ var store = new _vuex["default"].Store({
     */
     loadRawTweet: function loadRawTweet(_ref, id) {
       var commit = _ref.commit;
-      var self = this; //Make API call
 
+      //Make API call
       _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
-        self.commit('SAVE_RAW_TWEET', result.data); //Throw error if needed
+        commit('SAVE_RAW_TWEET', result.data); //Throw error if needed
       })["catch"](function (error) {
         throw new Error("API ERROR");
       });

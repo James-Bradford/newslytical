@@ -4,7 +4,7 @@ v-container(fill-height='')
   // Tweet Card Start
   v-row(align='center' justify='center')
     v-col(cols='12' md='8')
-      tweet-card
+      tweet-card(v-if="this.$store.state.tweet")
 
 </template>
 
