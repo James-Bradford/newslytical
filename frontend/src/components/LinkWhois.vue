@@ -1,12 +1,13 @@
 <template lang="pug">
+
     v-card.pa-2.elevation-4(color="warning")
       v-card-title.pa-2.white--text.text-h4
         v-icon.mdi.mdi-link(color='white' x-large)
         | Whois Data
       v-card-text
         v-divider.ma-2(color="white")
-      v-expansion-panels(v-model="this.panel" v-if="this.tweet.entities.urls.length > 0")
-        v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls')
+      v-expansion-panels(v-if="this.tweet.entities.urls.length > 0")
+        v-expansion-panel(v-for='(url, u) in this.tweet.entities.urls' :key="u")
           v-expansion-panel-header {{ whois[u].WhoisRecord.domainName }}
           v-expansion-panel-content 
               div(v-if='isHTTPS(url.expanded_url)') 
@@ -39,11 +40,6 @@ import Api from "../services/Api";
 
 export default {
   name: "LinkWhois",
-  data() {
-    return {
-      panel: [0]
-    }
-  },
   props: {
     urls: [],
   },
@@ -52,11 +48,9 @@ export default {
       return this.$store.state.tweet;
     },
     whois() {
+      console.log(this.$store.state.whois);
       return this.$store.state.whois;
     }
-  },
-  created() {
-    console.log(this.tweet);
   },
   methods: {
     isHTTPS(url) {

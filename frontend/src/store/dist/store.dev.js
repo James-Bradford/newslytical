@@ -69,62 +69,85 @@ var store = new _vuex["default"].Store({
      * @param {*} id 
      */
     loadTweet: function loadTweet(_ref2, id) {
-      var commit = _ref2.commit,
-          state = _ref2.state;
-      var self = this;
-      var tweet = {};
-      var urls = [];
-      var whois = []; //Make API call
+      var commit, dispatch;
+      return regeneratorRuntime.async(function loadTweet$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref2.commit, dispatch = _ref2.dispatch;
+              _context.next = 3;
+              return regeneratorRuntime.awrap(_Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
+                commit('SAVE_TWEET', result.data); //Throw error if needed
+              }).then(function () {
+                dispatch('loadWhois');
+              })["catch"](function (error) {
+                throw new Error("API ERROR");
+              }));
 
-      _Api["default"].get("twitter/tweet/".concat(id)).then(function (result) {
-        //Set variables
-        tweet = result.data;
-        urls = tweet.entities.urls;
-        var hashtags = tweet.entities.hashtags; //For each URL, replace it with highlighted version
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    },
+    loadWhois: function loadWhois(_ref3) {
+      var commit, state, urls, whois, i, url, hostname, extractedUrl;
+      return regeneratorRuntime.async(function loadWhois$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref3.commit, state = _ref3.state;
+              urls = state.tweet.entities.urls;
+              whois = []; //Performs whois on each hostname in Tweet
 
-        for (var i in urls) {
-          tweet.full_text = tweet.full_text.replace(urls[i].url, "<span class=\"highlightURL\">".concat(urls[i].expanded_url, "</span>"));
-        } //For each hashtag, replace it with highlighted version
+              i = 0;
 
+            case 4:
+              if (!(i < urls.length)) {
+                _context2.next = 15;
+                break;
+              }
 
-        for (var _i in hashtags) {
-          tweet.full_text = tweet.full_text.replace("#" + hashtags[_i].text, "<span class=\"highlightHashtag\">#".concat(hashtags[_i].text, "</span>"));
-        } //Assign modified tweet to state
+              url = urls[i].expanded_url;
 
-
-        self.commit('SAVE_TWEET', tweet); //Throw error if needed
-      })["catch"](function (error) {
-        throw new Error("API ERROR");
-      }); //Performs whois on each hostname in Tweet
-
-
-      for (var i = 0; i < urls.length; i++) {
-        var hostname; //find & remove protocol (http, ftp, etc.) and get hostname
-
-        if (url.indexOf("//") > -1) {
-          hostname = url.split("/")[2];
-        } else {
-          hostname = url.split("/")[0];
-        } //find & remove port number
-
-
-        hostname = hostname.split(":")[0]; //find & remove "?"
-
-        hostname = hostname.split("?")[0]; //Extract hostname
-
-        var url = _psl["default"].get(hostname); //Make API call
-
-
-        _Api["default"].get("whois/".concat(url)).then(function (result) {
-          //Add result to array
-          whois.push(result.data);
-        })["catch"](function (error) {
-          throw new Error("API ERROR");
-        });
-      } //Assign local variable
+              //find & remove protocol (http, ftp, etc.) and get hostname
+              if (url.indexOf("//") > -1) {
+                hostname = url.split("/")[2];
+              } else {
+                hostname = url.split("/")[0];
+              } //find & remove port number
 
 
-      this.commit('SAVE_WHOIS', whois);
+              hostname = hostname.split(":")[0]; //find & remove "?"
+
+              hostname = hostname.split("?")[0]; //Extract hostname
+
+              extractedUrl = _psl["default"].get(hostname); //Make API call
+
+              _context2.next = 12;
+              return regeneratorRuntime.awrap(_Api["default"].get("whois/".concat(extractedUrl)).then(function (result) {
+                //Add result to array
+                whois.push(result.data);
+              })["catch"](function (error) {
+                throw new Error("API ERROR");
+              }));
+
+            case 12:
+              i++;
+              _context2.next = 4;
+              break;
+
+            case 15:
+              //Assign local variable
+              commit('SAVE_WHOIS', whois);
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
     },
     loadTwitterTrendsUK: function loadTwitterTrendsUK() {
       var self = this;
@@ -144,8 +167,8 @@ var store = new _vuex["default"].Store({
         throw new Error("API ERROR");
       });
     },
-    setTab: function setTab(_ref3, tab) {
-      var commit = _ref3.commit;
+    setTab: function setTab(_ref4, tab) {
+      var commit = _ref4.commit;
       this.commit('SAVE_TAB', tab);
     }
   }

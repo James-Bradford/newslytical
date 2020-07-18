@@ -1,4 +1,5 @@
 <template lang="pug">
+
   v-container.px-lg-16.fill-height
     v-row.px-lg-16(justify='center' align='center')
       v-col(cols='12' md='5')

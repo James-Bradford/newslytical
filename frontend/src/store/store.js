@@ -59,41 +59,31 @@ export const store = new Vuex.Store({
          * @param {*} param0 
          * @param {*} id 
          */
-        loadTweet({ commit, state }, id) {
-            var self = this;
-            var tweet = {};
-            var urls = [];
-            var whois = [];
+        async loadTweet({ commit, dispatch }, id) {
 
-            //Make API call
-            Api.get(`twitter/tweet/${id}`)
+            //Assign modified tweet to state
+            await Api.get(`twitter/tweet/${id}`)
                 .then(function (result) {
-                    //Set variables
-                    tweet = result.data;
-                    urls = tweet.entities.urls;
-                    const hashtags = tweet.entities.hashtags;
-
-                    //For each URL, replace it with highlighted version
-                    for (let i in urls) {
-                        tweet.full_text = tweet.full_text.replace(urls[i].url, `<span class="highlightURL">${urls[i].expanded_url}</span>`);
-                    }
-
-                    //For each hashtag, replace it with highlighted version
-                    for (let i in hashtags) {
-                        tweet.full_text = tweet.full_text.replace("#" + hashtags[i].text, `<span class="highlightHashtag">#${hashtags[i].text}</span>`)
-                    }
-
-                    //Assign modified tweet to state
-                    self.commit('SAVE_TWEET', tweet)
-
+                    commit('SAVE_TWEET', result.data);
                     //Throw error if needed
+                }).then(function () {
+                    dispatch('loadWhois');
                 }).catch(error => {
                     throw new Error("API ERROR");
                 });
 
+
+        },
+        async loadWhois({ commit, state }) {
+
+
+            var urls = state.tweet.entities.urls;
+            var whois = [];
+
             //Performs whois on each hostname in Tweet
             for (let i = 0; i < urls.length; i++) {
 
+                var url = urls[i].expanded_url;
                 var hostname;
                 //find & remove protocol (http, ftp, etc.) and get hostname
 
@@ -109,10 +99,10 @@ export const store = new Vuex.Store({
                 hostname = hostname.split("?")[0];
 
                 //Extract hostname
-                var url = psl.get(hostname);
+                var extractedUrl = psl.get(hostname);
 
                 //Make API call
-                Api.get(`whois/${url}`)
+                await Api.get(`whois/${extractedUrl}`)
                     .then(function (result) {
 
                         //Add result to array
@@ -121,33 +111,33 @@ export const store = new Vuex.Store({
                     .catch(error => {
                         throw new Error("API ERROR");
                     });
-                }
-
-                //Assign local variable
-                this.commit('SAVE_WHOIS', whois);
-            },
-            loadTwitterTrendsUK() {
-                var self = this;
-
-                Api.get(`twitter/trends/44418`)
-                    .then(function (result) {
-                        self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
-                    }).catch(error => {
-                        throw new Error("API ERROR");
-                    });
-            },
-            loadTwitterTrendsUS() {
-                var self = this;
-
-                Api.get(`twitter/trends/2459115`)
-                    .then(function (result) {
-                        self.commit('SAVE_TWITTER_TRENDS_US', result.data);
-                    }).catch(error => {
-                        throw new Error("API ERROR");
-                    });
-            },
-            setTab({ commit }, tab) {
-                this.commit('SAVE_TAB', tab);
             }
+
+            //Assign local variable
+            commit('SAVE_WHOIS', whois);
+        },
+        loadTwitterTrendsUK() {
+            var self = this;
+
+            Api.get(`twitter/trends/44418`)
+                .then(function (result) {
+                    self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+        },
+        loadTwitterTrendsUS() {
+            var self = this;
+
+            Api.get(`twitter/trends/2459115`)
+                .then(function (result) {
+                    self.commit('SAVE_TWITTER_TRENDS_US', result.data);
+                }).catch(error => {
+                    throw new Error("API ERROR");
+                });
+        },
+        setTab({ commit }, tab) {
+            this.commit('SAVE_TAB', tab);
         }
-    });
+    }
+});
