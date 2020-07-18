@@ -16,7 +16,7 @@ export default {
   name: "InfoSteps",
   props: {
       color: String,
-      steps: []
+      steps: null
   },
 };
 </script>

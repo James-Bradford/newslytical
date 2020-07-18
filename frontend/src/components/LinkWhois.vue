@@ -1,6 +1,6 @@
 <template lang="pug">
 
-    v-card.pa-2.elevation-4(color="warning")
+    v-card.pa-2.elevation-4(color="warning" v-if="tweet.entities")
       v-card-title.pa-2.white--text.text-h4
         v-icon.mdi.mdi-link(color='white' x-large)
         | Whois Data
@@ -48,7 +48,6 @@ export default {
       return this.$store.state.tweet;
     },
     whois() {
-      console.log(this.$store.state.whois);
       return this.$store.state.whois;
     }
   },
