@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
         twitterTrendsUS: [],
         twitterTrendsUK: [],
         whois: null,
+        isLoading: false,
         tab: Number
     },
     mutations: {
@@ -29,6 +30,9 @@ export const store = new Vuex.Store({
         },
         SAVE_WHOIS(state, whois) {
             state.whois = whois;
+        },
+        TOGGLE_IS_LOADING(state) {
+            state.isLoading = !state.isLoading;
         },
         SAVE_TAB(state, tab) {
             state.tab = tab;

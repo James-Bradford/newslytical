@@ -60,6 +60,7 @@ export default {
           `<span class="highlightHashtag">#${hashtags[i].text}</span>`
         );
       }
+      
       return tweet.full_text;
     }
   },

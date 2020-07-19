@@ -21,7 +21,7 @@ div.fill-height
     v-tab-item.fill-height(:key='3')
       link-layout
 
-    // Trends Tab
+    //Keywords Tab
     v-tab-item.fill-height(:key='4')
       trends-layout
 
@@ -46,8 +46,8 @@ div.fill-height
       | Links
       v-icon mdi-link
     v-tab(:key='4')
-      | Trends
-      v-icon mdi-trending-up
+      | Words
+      v-icon mdi-format-color-text
     v-tab(:key='5')
       | Media
       v-icon mdi-image
@@ -74,25 +74,14 @@ export default {
     TrendsLayout,
     MediaLayout
   },
-  data() {
-    return {
-      isLoading: true
-    };
-  },
-  created() {
-    //Set loading variable, load VueX states
-    this.$store.dispatch("loadRawTweet", this.$route.params.id);
-    this.$store.dispatch("loadTweet", this.$route.params.id);
-    this.$store.dispatch("loadTwitterTrendsUS");
-    this.$store.dispatch("loadTwitterTrendsUK");
-    this.isLoading = false;
-  },
   computed: {
     //Tweet object returned from VueX state
     tweet() {
       return this.$store.state.tweet;
     },
-
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
     //Tab number returned from VueX state
     tab: {
       get: function() {
@@ -102,6 +91,15 @@ export default {
         this.$store.dispatch("setTab", tab);
       }
     }
+  },
+  created() {
+    //Set loading variable, load VueX states
+    this.$store.commit("TOGGLE_IS_LOADING");
+    this.$store.dispatch("loadRawTweet", this.$route.params.id);
+    this.$store.dispatch("loadTweet", this.$route.params.id);
+    this.$store.dispatch("loadTwitterTrendsUS");
+    this.$store.dispatch("loadTwitterTrendsUK");
+    this.$store.commit("TOGGLE_IS_LOADING");
   }
 };
 </script>

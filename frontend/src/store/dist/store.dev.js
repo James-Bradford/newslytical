@@ -24,6 +24,7 @@ var store = new _vuex["default"].Store({
     twitterTrendsUS: [],
     twitterTrendsUK: [],
     whois: null,
+    isLoading: false,
     tab: Number
   },
   mutations: {
@@ -41,6 +42,9 @@ var store = new _vuex["default"].Store({
     },
     SAVE_WHOIS: function SAVE_WHOIS(state, whois) {
       state.whois = whois;
+    },
+    TOGGLE_IS_LOADING: function TOGGLE_IS_LOADING(state) {
+      state.isLoading = !state.isLoading;
     },
     SAVE_TAB: function SAVE_TAB(state, tab) {
       state.tab = tab;

@@ -1,20 +1,24 @@
 <template lang="pug">
 div
-    v-chip(class="ma-2" color="white" v-for="(trend, u) in this.commonWords" @click="$emit('trend-select', trend.name)")
-        | {{trend.name}}
+  v-select(:items="keywords" solo @change="function(item) {$emit('trend-select', item)}")
+    
 </template>
 
 <script>
 const unique = require("unique-words");
+import rake from '@simonjb/rake-js'
 
 export default {
   name: "TrendsInfo",
   components: {
-    commonWords: []
+    keywords: []
   },
   computed: {
     tweetText() {
       return this.$store.state.rawTweet.full_text;
+    },
+    tweet() {
+      return this.$store.state.rawTweet;
     },
     trends() {
 
@@ -24,7 +28,11 @@ export default {
     }
   },
   created() {
+    this.keywords = rake(this.tweetText);
 
+    for (let i = 0; this.tweet.entities.hashtags.length > i; i++) {
+      this.keywords.push(this.tweet.entities.hashtags[i].text);
+    }
   }
 };
 </script>

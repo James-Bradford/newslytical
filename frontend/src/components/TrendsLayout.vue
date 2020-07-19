@@ -3,7 +3,7 @@
       v-row.px-lg-16.fill-height(justify='center' align='center')
         v-col(cols='12' md='5')
           trends-words(@trend-select="selectTrend($event)")
-          trends-other.mt-2(:related-topics="relatedTopics")
+          trends-other.mt-2(:related-topics="relatedTopics" :topicsLoading="topicsLoading")
         v-col(cols='12' md='7')
           div.text-body.font-weight-regular.text-justify 
             | Trending topics can be a big source of misinformation.
@@ -21,20 +21,22 @@ export default {
   name: "WordsLayout",
   data() {
     return {
-      relatedTopics: []
+      relatedTopics: [],
+      topicsLoading: Boolean
     };
   },
   methods: {
     selectTrend(e) {
       var self = this;
-      console.log(e);
+      this.topicsLoading = true;
       Api.get(`trends/related/${e}`)
         .then(function(result) {
           self.relatedTopics = result.data;
         })
         .catch(e => {
-    console.log(e);
-});
+          console.log(e);
+        });
+      this.topicsLoading = false;
     }
   },
   components: {

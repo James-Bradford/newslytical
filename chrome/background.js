@@ -1,21 +1,50 @@
+/**
+ * Summary. Background Functions
+ * Description. Provides the background functions for the Chrome Extension
+ * 
+ * @author James Bradford
+ * @version 1.0
+ */
 
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.url) { isTweet() }
-});
+chrome.tabs.onUpdated.addListener(
 
-chrome.tabs.onActiveChanged.addListener(function (tabId, changeInfo, tab) {
-    isTweet()
-});
+    /**
+     * If the tab has changed, perform isTweet()
+     * 
+     * @param {*} tabId ID of Current Tab
+     * @param {*} changeInfo Info from Changed Tab
+     * @param {*} tab Specific Tab
+     */
+    function (tabId, changeInfo, tab) {
+        if (changeInfo.url) { isTweet() }
+    });
 
 
+chrome.tabs.onActiveChanged.addListener(
+
+    /**
+     * If the tab has changed, perform isTweet()
+     * 
+     * @param {*} tabId ID of Current Tab
+     * @param {*} changeInfo Info from Changed Tab
+     * @param {*} tab Specific Tab
+     */
+    function (tabId, changeInfo, tab) {
+        isTweet()
+    });
+
+
+/**
+ * If current tab contains a tweet, pass message to popup.js
+ */
 function isTweet() {
 
     //Get Active Tab URL
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];
         url = activeTab.url;
-        
+
 
         if (/^(https|http)?:?\/?\/?twitter.com\/.*\/status\/\d*$/.test(url)) {
             chrome.browserAction.setBadgeText({ text: "1" });
@@ -37,7 +66,3 @@ function isTweet() {
 
 
 }
-
-/* chrome.browserAction.setBadgeText({
-    text:""
-});  */

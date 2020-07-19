@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Summary. ExpressJS Endpoints
+ * Description. Provides the endpoints for Newslytical backend
+ * 
+ * @author James Bradford
+ * @version 1.0
+ */
 //Import Dependencies
 var express = require('express');
 

@@ -1,3 +1,11 @@
+/**
+ * Summary. ExpressJS Endpoints
+ * Description. Provides the endpoints for Newslytical backend
+ * 
+ * @author James Bradford
+ * @version 1.0
+ */
+
 //Import Dependencies
 const express = require('express');
 const app = express();
@@ -43,9 +51,10 @@ app.get('/api/whois/:domain', (req, res) => {
         .catch(err => console.log(err));
 })
 
+
 // Get the daily trends for a given country
 app.get('/api/trends/daily/:geo', (req, res) => {
-    googleTrends.dailyTrends({geo: req.params.geo})
+    googleTrends.dailyTrends({ geo: req.params.geo })
         .then(results => {
             res.send(results);
         })
@@ -56,7 +65,7 @@ app.get('/api/trends/daily/:geo', (req, res) => {
 
 // Get the interest over time for a given word
 app.get('/api/trends/interest/:word', (req, res) => {
-    googleTrends.interestOverTime({keyword: req.params.word})
+    googleTrends.interestOverTime({ keyword: req.params.word })
         .then(results => {
             res.send(results);
         })
@@ -67,7 +76,7 @@ app.get('/api/trends/interest/:word', (req, res) => {
 
 // Get related topics for a given word
 app.get('/api/trends/related/:word', (req, res) => {
-    googleTrends.relatedTopics({keyword: req.params.word})
+    googleTrends.relatedTopics({ keyword: req.params.word })
         .then(results => {
             res.send(results);
         })
