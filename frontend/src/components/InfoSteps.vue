@@ -12,10 +12,19 @@
 </template>
 
 <script>
+/**
+ * Expansion panel for explanations
+ */
 export default {
   name: "InfoSteps",
   props: {
+      /**
+       * Background color of the card
+       */
       color: String,
+      /**
+       * Data to be displayed in expansion panel
+       */
       steps: null
   },
 };

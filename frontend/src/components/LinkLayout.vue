@@ -10,10 +10,14 @@
 </template>
 
 <script>
+//Import Components
 import LinkWhois from "./LinkWhois";
 import LinkCard from "./LinkCard";
 import InfoSteps from "./InfoSteps";
 
+/**
+ * Layout structure for the links section
+ */
 export default {
   name: "LinkLayout",
   components: {

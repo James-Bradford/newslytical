@@ -8,6 +8,9 @@
 </template>
 
 <script>
+/**
+ * Explanation of the WHOIS section
+ */
 export default {
     name: 'LinkCard',
     data() {
