@@ -11,7 +11,7 @@ v-card#tweet-card.mx-auto.pa-6.rounded-lg.elevated-4
   v-card-actions
     v-list-item.grow
       v-list-item-avatar(color='grey darken-3')
-        img.elevation-6(:src="profile_url")
+        img.elevation-6(:src="tweet.user.profile_image_url")
       v-list-item-content
         v-list-item-title.white--text(v-if="tweet.user") {{ tweet.user.name }}
       v-row(align='center' justify='end')
