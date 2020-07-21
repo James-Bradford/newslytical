@@ -10,7 +10,7 @@ div.fill-height
     router-view
     
     // Tweet Tab
-    v-tab-item.fill-height(:key='1')
+    //v-tab-item.fill-height(:key='1')
       tweet-layout
 
     // Profile Tab
@@ -34,9 +34,9 @@ div.fill-height
         h1 Summary
 
   // Tab Buttons
-  v-tabs(v-model='tab' icons-and-text='' style='position: fixed; bottom: 0; left: 0; width: 100%; z-index: 5' center-active='' centered='' grow='')
+  v-tabs(v-model='tab' icons-and-text='' style='position: fixed; bottom: 0; left: 0; width: 100%; z-index: 5;' center-active='' centered='' grow='')
     v-tabs-slider
-    v-tab(:key='1')
+    //v-tab(:key='1')
       | Tweet
       v-icon mdi-twitter
     v-tab(:key='2')

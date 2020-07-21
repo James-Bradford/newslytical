@@ -1,8 +1,8 @@
 <template lang="pug">
-    v-card.pa-1(:color="color")
+    v-card.pa-1.rounded-0(:color="color")
 
         v-expansion-panels
-            v-expansion-panel(v-for='(item,i) in steps' :key='i')
+            v-expansion-panel.rounded-0(v-for='(item,i) in steps' :key='i')
                 v-expansion-panel-header 
                     div
                         v-icon.pr-2(medium) {{item.icon}}

@@ -2,18 +2,17 @@
 
     v-container.px-lg-16.fill-height
         v-row.px-lg-16.fill-height(justify='center' align='center' v-if="tweet.extended_entities")
-            v-col(cols='12' md='5')
-
-                //Carousel Card
-                v-card.pa-1(color="purple")
-                    v-card-title.white--text.text-h5 
-                        v-icon(color="white") mdi-image
-                        | Images
+            v-col(cols='12' md='8')
+              //Carousel Card
+              v-card.pa-1.rounded-0(color="purple" style="max-height: 50%")
+                v-card-title.white--text.text-h5 
+                  v-icon(color="white") mdi-image
+                  | Images
                 
-                    v-carousel(height="100%" hide-delimiter-background='' show-arrows-on-hover='')
-                        media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
+                v-carousel(hide-delimiter-background='' show-arrows-on-hover='')
+                  media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
+            v-col(cols='12' md='4')
 
-            v-col(cols='12' md='7')
               info-steps(color="purple" :steps="steps")
 
 
@@ -23,20 +22,25 @@
 </template>
 
 <script>
+//Import Components
 import MediaCarousel from "./MediaCarousel";
 import InfoSteps from "./InfoSteps";
+import TweetCard from "./TweetCard";
 
+/**
+ * Provides the layout for the media section
+ */
 export default {
   name: "MediaLayout",
   computed: {
-    //Tweet object returned from VueX state
     tweet() {
       return this.$store.state.tweet;
     }
   },
   components: {
     MediaCarousel,
-    InfoSteps
+    InfoSteps,
+    TweetCard
   },
   data() {
     return {

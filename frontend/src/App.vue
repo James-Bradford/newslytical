@@ -1,8 +1,8 @@
 <template lang="pug">
-  v-app.fill-height()
+  v-app
     v-main.fill-height
        nav-bar
-       router-view.fill-height()
+       router-view
 </template>
 
 <script>

@@ -1,23 +1,35 @@
 <template lang="pug">
+
+  //Page Container
   v-container.px-lg-16(fill-height='')
+
     v-row.px-lg-16(align='center' justify='center')
-      v-col(cols='12' md='6')
-        profile-card(:tweet='tweet')
-      v-col(cols='12' md='6')
+
+      //Left Column
+      //v-col(cols='12' md='5')
+        tweet-card(highlightType="profile")
+      //Right Column  
+      v-col(cols='12' md='12')
+        profile-card.mb-2
         info-steps(color="success" :steps="steps")
+        
 </template>
 
 <script>
-import { Twitter } from "../services/Twitter";
-
+//Import Components
 import ProfileCard from "./ProfileCard";
 import InfoSteps from "./InfoSteps";
+import TweetCard from "./TweetCard";
 
+/**
+ * Provides layout for profile section
+ */
 export default {
   name: "Profile",
   components: {
     ProfileCard,
-    InfoSteps
+    InfoSteps,
+    TweetCard
   },
   data() {
     return {
@@ -48,9 +60,6 @@ export default {
         }
       ]
     };
-  },
-  props: {
-    tweet: Object
   }
 };
 </script>
