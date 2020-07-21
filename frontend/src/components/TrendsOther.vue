@@ -6,8 +6,9 @@
             v-icon(large='' left='') mdi-trending-up
             span.title.font-weight-light Other Topics
         v-card-text
-            div(v-for="(trend, u) in this.relatedTopics.default.rankedList[0].rankedKeyword.slice(0,5)")
-                a(:href=" 'https://fullfact.org/search/?q=' + trend.topic.title ")| {{trend.topic.title}}
+          v-chip-group(multiple='' active-class='primary--text')
+            v-chip(v-for='(trend, u) in relatedTopics.default.rankedList[0].rankedKeyword.slice(0,5)' :key='u')
+            | {{ trend.topic.title }}
             
         
 </template>

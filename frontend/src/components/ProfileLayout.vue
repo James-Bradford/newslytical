@@ -10,7 +10,7 @@
         tweet-card(highlightType="profile")
       //Right Column  
       v-col(cols='12' md='12')
-        profile-card.mb-2
+        profile-card
         info-steps(color="success" :steps="steps")
         
 </template>

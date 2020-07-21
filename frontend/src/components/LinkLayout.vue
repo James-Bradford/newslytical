@@ -2,10 +2,10 @@
 
   v-container.px-lg-16.fill-height
     v-row.px-lg-16(justify='center' align='center')
-      v-col(cols='12' md='5')
+      v-col(cols='12' md='12')
         link-whois(v-if="tweet")
-      v-col(cols='12' md='7')
         info-steps(color="warning" :steps="steps")
+      v-col(cols='12' md='7')
 
 </template>
 

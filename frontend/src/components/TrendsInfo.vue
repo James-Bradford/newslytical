@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  v-select(:items="keywords" solo @change="function(item) {$emit('trend-select', item)}")
+  v-select.rounded-0(:items="keywords" solo @change="function(item) {$emit('trend-select', item)}")
     
 </template>
 
