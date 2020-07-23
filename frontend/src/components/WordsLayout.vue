@@ -12,7 +12,25 @@
             //Card Content
             words-keywords(@trend-select="selectTrend($event)")
             words-other(v-if="relatedTopics" :related-topics="relatedTopics" :topicsLoading="topicsLoading")
-            info-steps(color="accent" :steps="steps")
+
+            //Explanation Expansion Panels
+            v-card.pa-1.rounded-0(color="accent")
+              v-expansion-panels
+                v-expansion-panel.rounded-0(v-for='(item,i) in steps' :key='i')
+                  v-expansion-panel-header 
+                    div
+                        v-icon.pr-2(medium) {{item.icon}}
+                        | {{item.subtitle}}
+                  v-expansion-panel-content
+                    div(v-html="item.description")   
+
+                v-expansion-panel.rounded-0
+                  v-expansion-panel-header 
+                    div
+                        v-icon.pr-2(medium) mdi-sticker-emoji
+                        | Sentiment Analysis
+                  v-expansion-panel-content
+                    div Test  
 </template>
 
 <script>

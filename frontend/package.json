@@ -16,6 +16,7 @@
     "psl": "^1.8.0",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
+    "sentiment": "^5.0.2",
     "unique-words": "^2.0.1",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
