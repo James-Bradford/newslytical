@@ -24,13 +24,23 @@
                   v-expansion-panel-content
                     div(v-html="item.description")   
 
+                //Sentiment Analysis Panel
                 v-expansion-panel.rounded-0
                   v-expansion-panel-header 
                     div
                         v-icon.pr-2(medium) mdi-sticker-emoji
                         | Sentiment Analysis
                   v-expansion-panel-content
-                    div Test  
+                    | The sentiment analysis has a score of {{ sentimentAnalysis().score }}
+                    div(v-if="sentimentAnalysis().score >= 4 || sentimentAnalysis().score <= -4") 
+                      | The score is strongly weighted and indicates strong emotion.  Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation.  It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
+                    div(v-else-if="sentimentAnalysis().score >= 3 || sentimentAnalysis().score <= -3")
+                      | The score is quite strongly weighted and indicates some emotion.  Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation.  It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
+                    div(v-else-if="sentimentAnalysis().score == 0")
+                      | The score has shown that the Tweet balances out in terms of positive and negative language.  While not always the case, this can indicate more trustworthy and factual content. Carrying out further research on the keywords above will help make your decision.
+                    div(v-else)
+                      | The score has a weak positive or negative emotion.  This means that it might be more likely to contain trustworthy or factual content.  Carrying out further research on the keywords above will help make your decision.
+                      
 </template>
 
 <script>
@@ -41,6 +51,9 @@ import InfoSteps from "./InfoSteps";
 
 //Import API
 import Api from "../services/Api";
+
+//Import NPM Packages
+var Sentiment = require('sentiment');
 
 /**
  * Provides the layout for the words section
@@ -84,6 +97,14 @@ export default {
           console.log(e);
         });
       this.topicsLoading = false;
+    },
+    /**
+     * Provides a sentiment analysis for the Tweet
+     */
+    sentimentAnalysis() {
+      var sentiment = new Sentiment();
+      var result = sentiment.analyze(this.$store.state.rawTweet.full_text);
+      return result;
     }
   },
   components: {
