@@ -5,9 +5,9 @@
           v-card.rounded-0(color='accent')
 
             //Card Header
-            v-card-title
+            v-card-title.white--text.text-h4
               v-icon(large='' left='' color='white') mdi-card-text-outline
-              span.font-weight-light.white--text Words
+              | Words
 
             //Card Content
             words-keywords(@trend-select="selectTrend($event)")

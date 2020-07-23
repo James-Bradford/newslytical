@@ -47,7 +47,7 @@ div.fill-height
       v-icon mdi-link
     v-tab(:key='4')
       | Words
-      v-icon mdi-format-color-text
+      v-icon mdi-card-text-outline
     v-tab(:key='5')
       | Media
       v-icon mdi-image

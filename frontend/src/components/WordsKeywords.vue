@@ -14,14 +14,14 @@
         br
 
         //Quick Action Buttons
-        v-btn-toggle(rounded dense v-if="selectedKeyword")
-          v-btn(color="white" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`") 
+        v-btn-toggle(rounded dense v-if="selectedKeyword" style="width: 100%")
+          v-btn(color="white" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%") 
             v-icon() mdi-triangle
             | FullFact Lookup
-          v-btn(color="white" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`") 
+          v-btn(color="white" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
             v-icon() mdi-desk-lamp
             | Snopes Lookup
-          v-btn(color="white" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`") 
+          v-btn(color="white" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%") 
             v-icon() mdi-google
             | Google Search
 

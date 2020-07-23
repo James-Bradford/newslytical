@@ -3,7 +3,7 @@
     v-card.pa-2.elevation-4.rounded-0(color="warning" v-if="tweet.entities")
       v-card-title.pa-2.white--text.text-h4
         v-icon.mdi.mdi-link(color='white' x-large)
-        | Whois Data
+        | Links
       v-card-text
         v-divider.ma-2(color="white")
       v-expansion-panels(v-if="this.tweet.entities.urls.length > 0")
