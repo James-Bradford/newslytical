@@ -12,7 +12,6 @@
 <script>
 //Import Components
 import LinkWhois from "./LinkWhois";
-import LinkCard from "./LinkCard";
 import InfoSteps from "./InfoSteps";
 
 /**

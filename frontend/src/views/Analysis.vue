@@ -23,7 +23,7 @@ div.fill-height
 
     //Keywords Tab
     v-tab-item.fill-height(:key='4')
-      trends-layout
+      words-layout
 
     //Media Tab
     v-tab-item.fill-height(:key='5')
@@ -62,7 +62,7 @@ div.fill-height
 import TweetLayout from "../components/TweetLayout";
 import LinkLayout from "../components/LinkLayout";
 import ProfileLayout from "../components/ProfileLayout";
-import TrendsLayout from "../components/TrendsLayout";
+import WordsLayout from "../components/WordsLayout";
 import MediaLayout from "../components/MediaLayout";
 
 export default {
@@ -71,7 +71,7 @@ export default {
     TweetLayout,
     ProfileLayout,
     LinkLayout,
-    TrendsLayout,
+    WordsLayout,
     MediaLayout
   },
   computed: {
