@@ -1,9 +1,10 @@
-<template>
-  <v-app-bar style="position: fixed; top: 0; left: 0; width: 100%; z-index: 10">
-
-      <v-toolbar-title><v-img src="../assets/logo.png" alt="logo" height="40px" contain /></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn id="btn-dark-mode" v-on:click="$vuetify.theme.dark = !$vuetify.theme.dark" icon><v-icon>mdi-invert-colors</v-icon></v-btn>
+<template lang="pug">
+  v-app-bar(fixed dense)
+    v-toolbar-title
+      v-img(src="../assets/logo.png" alt="logo" height="40px" contain)
+    v-spacer
+    v-btn(id="btn-dark-mode" v-on:click="$vuetify.theme.dark = !$vuetify.theme.dark" icon)
+      v-icon mdi-invert-colors
 
     </v-app-bar>
 </template>

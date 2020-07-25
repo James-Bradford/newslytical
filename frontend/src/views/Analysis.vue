@@ -8,10 +8,6 @@ div.fill-height
   // Tab Content Start
   v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model='tab')
     router-view
-    
-    // Tweet Tab
-    //v-tab-item.fill-height(:key='1')
-      tweet-layout
 
     // Profile Tab
     v-tab-item.fill-height(:key='2')
@@ -33,28 +29,23 @@ div.fill-height
       v-container
         h1 Summary
 
-  // Tab Buttons
-  v-tabs(v-model='tab' icons-and-text='' style='position: fixed; bottom: 0; left: 0; width: 100%; z-index: 5;' center-active='' centered='' grow='')
-    v-tabs-slider
-    //v-tab(:key='1')
-      | Tweet
-      v-icon mdi-twitter
-    v-tab(:key='2')
-      | Profile
+  v-bottom-navigation(:value="tab" :color="tabColor" scroll-target="#scroll-area-1" hide-on-scroll absolute) 
+    v-btn(@click="setTab(0)")
+      span Profile
       v-icon mdi-account
-    v-tab(:key='3')
-      | Links
+    v-btn(@click="setTab(1)")
+      span Links
       v-icon mdi-link
-    v-tab(:key='4')
-      | Words
+    v-btn(@click="setTab(2)")
+      span Words
       v-icon mdi-card-text-outline
-    v-tab(:key='5')
-      | Media
+    v-btn(@click="setTab(3)")
+      span Images
       v-icon mdi-image
-    v-tab(:key='6')
-      | Summary
-      v-icon mdi-card-text-outline
-
+    v-btn(@click="setTab(4)")
+      span Summary
+      v-icon mdi-clipboard-outline
+    
 </template>
 
 <script>
@@ -67,12 +58,46 @@ import MediaLayout from "../components/MediaLayout";
 
 export default {
   name: "Analysis",
+  data() {
+    return {
+      tab: 0,
+      tabColor: "success"
+    }
+  },
   components: {
     TweetLayout,
     ProfileLayout,
     LinkLayout,
     WordsLayout,
     MediaLayout
+  },
+  methods: {
+    /**
+     * Sets the number and color of the active tab
+     *
+     * @param num Tab Number
+     */
+    setTab(num) {
+      this.tab = num;
+      
+      switch(num) {
+        case 0:
+          this.tabColor = "success";
+          break;
+        case 1:
+          this.tabColor = "warning";
+          break;
+        case 2:
+          this.tabColor = "accent";
+          break;
+        case 3:
+          this.tabColor = "purple";
+          break;
+        case 4:
+          this.tabColor = "pink";
+          break;
+      }
+    }
   },
   computed: {
     //Tweet object returned from VueX state
@@ -82,15 +107,6 @@ export default {
     isLoading() {
       return this.$store.state.isLoading;
     },
-    //Tab number returned from VueX state
-    tab: {
-      get: function() {
-        return this.$store.state.tab;
-      },
-      set: function(tab) {
-        this.$store.dispatch("setTab", tab);
-      }
-    }
   },
   created() {
     //Set loading variable, load VueX states
