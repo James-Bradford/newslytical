@@ -31,7 +31,9 @@
                         v-icon.pr-2(medium) mdi-sticker-emoji
                         | Sentiment Analysis
                   v-expansion-panel-content
-                    | The sentiment analysis has a score of {{ sentimentAnalysis().score }}
+                    //Sentiment Analysis Progress
+                    v-progress-linear(v-model="progress.value" :color="progress.color" :backgroundColor="progress.backgroundColor" v-if="progress")
+
                     div(v-if="sentimentAnalysis().score >= 4 || sentimentAnalysis().score <= -4") 
                       | The score is strongly weighted and indicates strong emotion.  Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation.  It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
                     div(v-else-if="sentimentAnalysis().score >= 3 || sentimentAnalysis().score <= -3")
@@ -72,7 +74,12 @@ export default {
           description:
             "Certain keywords in a Tweet can give you an indication of what topics it discusses.  Each keyword can be searched on various fact checking websites as well as Google.  This allows you to understand more about the topic and whether it is a common source of misinformation before drawing your own conclusion.  Additionally some similar words are shown to provide more areas for research."
         }
-      ]
+      ],
+      progress: {
+        color: null,
+        backgroundColor: null,
+        value: null
+      }
     };
   },
   methods: {
@@ -104,8 +111,12 @@ export default {
     sentimentAnalysis() {
       var sentiment = new Sentiment();
       var result = sentiment.analyze(this.$store.state.rawTweet.full_text);
+      if (result.value == 0) {
+        this.progress.color = "green"
+      }
+      this.progress.value = Math.abs(result.score)*100;
       return result;
-    }
+    },
   },
   components: {
     WordsKeywords,
