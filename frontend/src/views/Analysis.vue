@@ -34,19 +34,19 @@ div.fill-height
 
 
     v-bottom-navigation(:value="tab" :color="tabColor" scroll-target="#scroll-area-1" hide-on-scroll fixed shift) 
-      v-btn(@click="setTab(0)")
+      v-btn(@click="setTab(0); $emit('set-tab', 0)")
         span Profile
         v-icon mdi-account
-      v-btn(@click="setTab(1)")
+      v-btn(@click="setTab(1); $emit('set-tab', 1)")
         span Links
         v-icon mdi-link
-      v-btn(@click="setTab(2)")
+      v-btn(@click="setTab(2); $emit('set-tab', 2)")
         span Words
         v-icon mdi-card-text-outline
-      v-btn(@click="setTab(3)")
+      v-btn(@click="setTab(3); $emit('set-tab', 3)")
         span Images
         v-icon mdi-image
-      v-btn(@click="setTab(4)")
+      v-btn(@click="setTab(4); $emit('set-tab', 4)")
         span Summary
         v-icon mdi-clipboard-outline
 
@@ -83,6 +83,7 @@ export default {
      * @param num Tab Number
      */
     setTab(num) {
+      this.$store.commit('SAVE_TAB', num);
       this.tab = num;
       
       switch(num) {

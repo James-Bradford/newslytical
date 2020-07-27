@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         twitterTrendsUK: [],
         whois: null,
         isLoading: false,
-        tab: Number
+        tab: 0
     },
     mutations: {
         SAVE_RAW_TWEET(state, rawTweet) {

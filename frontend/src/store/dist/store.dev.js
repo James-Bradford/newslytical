@@ -25,7 +25,7 @@ var store = new _vuex["default"].Store({
     twitterTrendsUK: [],
     whois: null,
     isLoading: false,
-    tab: Number
+    tab: 0
   },
   mutations: {
     SAVE_RAW_TWEET: function SAVE_RAW_TWEET(state, rawTweet) {

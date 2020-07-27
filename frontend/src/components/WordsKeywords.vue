@@ -15,13 +15,13 @@
 
         //Quick Action Buttons
         v-btn-toggle(rounded dense v-if="selectedKeyword" style="width: 100%")
-          v-btn(color="white" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%") 
-            v-icon() mdi-triangle
+          v-btn(color="#222222" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%; color: white") 
+            v-icon(color="white") mdi-triangle
             | FullFact Lookup
-          v-btn(color="white" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
+          v-btn(color="#FBD440" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
             v-icon() mdi-desk-lamp
             | Snopes Lookup
-          v-btn(color="white" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%") 
+          v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
             v-icon() mdi-google
             | Google Search
 
