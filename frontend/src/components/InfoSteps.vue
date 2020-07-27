@@ -1,14 +1,18 @@
 <template lang="pug">
     v-card.pa-1.rounded-0(:color="color")
 
-        v-expansion-panels
-            v-expansion-panel.rounded-0(v-for='(item,i) in steps' :key='i' @click="$emit('panel-clicked',i)")
-                v-expansion-panel-header 
-                    div
-                        v-icon.pr-2(medium) {{item.icon}}
-                        | {{item.subtitle}}
-                v-expansion-panel-content
-                    div(v-html="item.description")        
+      v-expansion-panels
+        v-expansion-panel.rounded-0(v-for='(item,i) in steps' :key='i' @click="$emit('panel-clicked',i)")
+
+          //Panel Header
+          v-expansion-panel-header 
+            div
+              v-icon.pr-2(medium) {{item.icon}}
+              | {{item.subtitle}}
+          
+          //Panel Content
+          v-expansion-panel-content
+            div(v-html="item.description")        
 </template>
 
 <script>
@@ -31,6 +35,7 @@ export default {
 </script>
 
 <style>
+/* Blockquote Styling */
 blockquote {
   border-left: 5px solid var(--v-info-darken1);;
   padding: 5px;

@@ -36,18 +36,33 @@
 export default {
   name: "ProfileCard",
   computed: {
+    /**
+     * Tweet object
+     */    
     tweet() {
       return this.$store.state.tweet;
     },
+    /**
+     * Follower count
+     */
     followers_count() {
       return this.formatNumber(this.$store.state.tweet.user.followers_count);
     },
+    /**
+     * Friends count
+     */
     friends_count() {
       return this.formatNumber(this.$store.state.tweet.user.friends_count);
     },
+    /**
+     * Statuses count
+     */
     statuses_count() {
       return this.formatNumber(this.$store.state.tweet.user.statuses_count);
     },
+    /**
+     * Account age
+     */
     account_age() {
       var creationDate = new Date(this.$store.state.tweet.user.created_at);
       var now = new Date();

@@ -19,10 +19,16 @@ export default {
   name: "NavBar",
   data() {
     return {
+      /**
+       * Toggle dark mode
+       */
       darkToggle: null,
     }
   },
   computed: {
+    /**
+     * Currently active tab
+     */
     tab() {
       return this.$store.state.tab;
     }

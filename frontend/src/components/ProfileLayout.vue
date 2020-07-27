@@ -4,11 +4,12 @@
 
     v-row.px-lg-16(align='center' justify='center')
 
-      //Right Column  
+      //Left Column  
       v-col(cols='12' md='8')
         profile-card
         info-steps(color="success" :steps="panels" @panel-clicked="panelClicked($event)")
 
+      //Right Column
       v-col(cols='12' md='4')
         explanation-panel(:color="'success'" :steps="steps")
       
@@ -33,12 +34,20 @@ export default {
     ExplanationPanel,
   },
   methods: {
+    /**
+     * Marks steps as completed when panel expanded
+     * 
+     * @param event Completed step
+     */
     panelClicked(event) {
       this.steps[event].completed = true;
     }
   },
   data() {
     return {
+      /**
+       * Information shown in expansion panel
+       */
       panels: [
         {
           icon: "mdi-at",
@@ -65,6 +74,9 @@ export default {
             "Sometimes accounts are created with the only intent of sharing misinformation.  This is particularly common during a big event such as an election where they will attempt to sway public opinion.  As a general rule, older accounts are more trustworthy.",
         },
       ],
+      /**
+       * Steps shown in checklist
+       */
       steps: [
         {
           id: 1,

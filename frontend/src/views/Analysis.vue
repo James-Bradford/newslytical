@@ -24,10 +24,11 @@
     v-tab-item.fill-height(:key="4")
       link-layout
 
-    //Media Tab
+    //Images Tab
     v-tab-item.fill-height(:key="5")
       media-layout
 
+    //Feedback Tab
     v-tab-item.fill-height(:key="6")
       v-container.fill-height
         v-row.fill-height.px-lg-16(align="center", justify="center")
@@ -40,6 +41,7 @@
             marginwidth="0"
           ) Loading&mldr;
 
+    //Bottom Navigation
     v-bottom-navigation(
       :value="tab",
       :color="tabColor",
@@ -48,6 +50,7 @@
       fixed,
       shift
     ) 
+      //Twitter Button
       v-btn(@click="setTab(0); $emit('set-tab', 0)")
         span Tweet
         v-icon mdi-twitter
@@ -65,6 +68,7 @@
           span Profile
           v-icon mdi-account
 
+      //Words Button
       v-badge.fill-height(
         bordered,
         color="info",
@@ -78,6 +82,7 @@
           span Words
           v-icon mdi-card-text-outline
 
+      //Links Button
       v-badge.fill-height(
         bordered,
         color="info",
@@ -91,6 +96,7 @@
           span Links
           v-icon mdi-link
 
+      //Image Button
       v-badge.fill-height(
         bordered,
         color="info",
@@ -104,6 +110,7 @@
           span Images
           v-icon mdi-image
 
+      //Feedback Button
       v-btn(
         @click="setTab(5); $emit('set-tab', 5)",
         v-if="visitedTabs.profile && visitedTabs.links && visitedTabs.words && visitedTabs.images"
@@ -124,9 +131,17 @@ export default {
   name: "Analysis",
   data() {
     return {
-      
-      tab: 0,
-      tabColor: "info",
+      /**
+       * Active tab number
+       */
+      tab: Number(0),
+      /**
+       * Color of active tab button
+       */
+      tabColor: String("info"),
+      /**
+       * True if tabs have been visited
+       */
       visitedTabs: {
         profile: false,
         links: false,
@@ -199,11 +214,15 @@ export default {
     },
   },
   computed: {
-    //Tweet object
+    /**
+     * Tweet object
+     */
     tweet() {
       return this.$store.state.tweet;
     },
-    //Loading state
+    /**
+     * Loading state
+     */
     isLoading() {
       return this.$store.state.isLoading;
     },
