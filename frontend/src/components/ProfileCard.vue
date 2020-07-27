@@ -49,7 +49,7 @@ export default {
       return this.formatNumber(this.$store.state.tweet.user.statuses_count);
     },
     account_age() {
-      var creationDate = new Date(this.$store.state.tweet.user.statuses_count);
+      var creationDate = new Date(this.$store.state.tweet.user.created_at);
       var now = new Date();
       var accountAge = (now - creationDate) / (1000 * 3600 * 24);
 

@@ -1,58 +1,115 @@
 <template lang="pug">
-div.fill-height
-
+.fill-height
   //Loading Overlay
-  v-overlay(v-if='isLoading')
-    v-progress-circular(indeterminate='' color='primary' size='200')
+  v-overlay(v-if="isLoading")
+    v-progress-circular(indeterminate="", color="primary", size="200")
 
   // Tab Content Start
-  v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model='tab')
+  v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab")
     router-view
 
+    // Tweet Tab
+    v-tab-item.fill-height(:key="1")
+      h1 Tweet
+
     // Profile Tab
-    v-tab-item.fill-height(:key='2')
+    v-tab-item.fill-height(:key="2")
       profile-layout
 
-    // Link Tab
-    v-tab-item.fill-height(:key='3')
-      link-layout
-
     //Keywords Tab
-    v-tab-item.fill-height(:key='4')
+    v-tab-item.fill-height(:key="3")
       words-layout
 
+    // Link Tab
+    v-tab-item.fill-height(:key="4")
+      link-layout
+
     //Media Tab
-    v-tab-item.fill-height(:key='5')
+    v-tab-item.fill-height(:key="5")
       media-layout
 
-    v-tab-item.fill-height(:key='6')
+    v-tab-item.fill-height(:key="6")
       v-container.fill-height
-        v-row.fill-height.px-lg-16(align='center' justify='center')
-          iframe(:src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`" width='640' height='613' frameborder='0' marginheight='0' marginwidth='0') Loading&mldr;
+        v-row.fill-height.px-lg-16(align="center", justify="center")
+          iframe(
+            :src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`",
+            width="640",
+            height="613",
+            frameborder="0",
+            marginheight="0",
+            marginwidth="0"
+          ) Loading&mldr;
 
-
-
-
-
-
-    v-bottom-navigation(:value="tab" :color="tabColor" scroll-target="#scroll-area-1" hide-on-scroll fixed shift) 
+    v-bottom-navigation(
+      :value="tab",
+      :color="tabColor",
+      scroll-target="#scroll-area-1",
+      hide-on-scroll,
+      fixed,
+      shift
+    ) 
       v-btn(@click="setTab(0); $emit('set-tab', 0)")
-        span Profile
-        v-icon mdi-account
-      v-btn(@click="setTab(1); $emit('set-tab', 1)")
-        span Links
-        v-icon mdi-link
-      v-btn(@click="setTab(2); $emit('set-tab', 2)")
-        span Words
-        v-icon mdi-card-text-outline
-      v-btn(@click="setTab(3); $emit('set-tab', 3)")
-        span Images
-        v-icon mdi-image
-      v-btn(@click="setTab(4); $emit('set-tab', 4)")
+        span Tweet
+        v-icon mdi-twitter
+
+      v-badge.fill-height(
+        bordered,
+        color="info",
+        content="",
+        overlap,
+        offset-x="30",
+        left,
+        :value="!visitedTabs.profile"
+      ) 
+        v-btn(@click="setTab(1); $emit('set-tab', 1)")
+          span Profile
+          v-icon mdi-account
+
+      v-badge.fill-height(
+        bordered,
+        color="info",
+        content="",
+        overlap,
+        offset-x="30",
+        left,
+        :value="!visitedTabs.words"
+      ) 
+        v-btn(@click="setTab(2); $emit('set-tab', 2)")
+          span Words
+          v-icon mdi-card-text-outline
+
+      v-badge.fill-height(
+        bordered,
+        color="info",
+        :content="getLinksBadge()",
+        overlap,
+        offset-x="30",
+        left,
+        :value="!visitedTabs.links"
+      ) 
+        v-btn(@click="setTab(3); $emit('set-tab', 3)")
+          span Links
+          v-icon mdi-link
+
+      v-badge.fill-height(
+        bordered,
+        color="info",
+        :content="getMediaBadge()",
+        overlap,
+        offset-x="30",
+        left,
+        :value="!visitedTabs.images"
+      ) 
+        v-btn(@click="setTab(4); $emit('set-tab', 4)")
+          span Images
+          v-icon mdi-image
+
+      v-btn(
+        @click="setTab(5); $emit('set-tab', 5)",
+        v-if="visitedTabs.profile && visitedTabs.links && visitedTabs.words && visitedTabs.images"
+      )
         span Feedback
         v-icon mdi-bullhorn
-
-    
 </template>
 
 <script>
@@ -67,16 +124,23 @@ export default {
   name: "Analysis",
   data() {
     return {
+      
       tab: 0,
-      tabColor: "success"
-    }
+      tabColor: "info",
+      visitedTabs: {
+        profile: false,
+        links: false,
+        words: false,
+        images: false,
+      },
+    };
   },
   components: {
     TweetLayout,
     ProfileLayout,
     LinkLayout,
     WordsLayout,
-    MediaLayout
+    MediaLayout,
   },
   methods: {
     /**
@@ -85,33 +149,61 @@ export default {
      * @param num Tab Number
      */
     setTab(num) {
-      this.$store.commit('SAVE_TAB', num);
+      this.$store.commit("SAVE_TAB", num);
       this.tab = num;
-      
-      switch(num) {
+
+      switch (num) {
         case 0:
-          this.tabColor = "success";
+          this.tabColor = "info";
           break;
         case 1:
-          this.tabColor = "warning";
+          this.tabColor = "success";
+          this.visitedTabs.profile = true;
           break;
         case 2:
           this.tabColor = "accent";
+          this.visitedTabs.words = true;
           break;
         case 3:
-          this.tabColor = "purple";
+          this.tabColor = "warning";
+          this.visitedTabs.links = true;
           break;
         case 4:
+          this.tabColor = "purple";
+          this.visitedTabs.images = true;
+          break;
+        case 5:
           this.tabColor = "blue-grey darken-1";
           break;
       }
-    }
+    },
+    /**
+     * Gets the value of the media badge
+     */
+    getMediaBadge() {
+      if (this.tweet.extended_entities != undefined) {
+        return this.tweet.extended_entities.media.length;
+      } else {
+        return "";
+      }
+    },
+    /**
+     * Gets the value of the links badge
+     */
+    getLinksBadge() {
+      if (this.tweet.entities != undefined) {
+        return this.tweet.entities.urls.length;
+      } else {
+        return "";
+      }
+    },
   },
   computed: {
-    //Tweet object returned from VueX state
+    //Tweet object
     tweet() {
       return this.$store.state.tweet;
     },
+    //Loading state
     isLoading() {
       return this.$store.state.isLoading;
     },
@@ -124,7 +216,7 @@ export default {
     this.$store.dispatch("loadTwitterTrendsUS");
     this.$store.dispatch("loadTwitterTrendsUK");
     this.$store.commit("TOGGLE_IS_LOADING");
-  }
+  },
 };
 </script>
 
