@@ -1,15 +1,15 @@
 <template lang="pug">
   div
 
-    v-card-text
+    v-card.ma-1.pa-3.rounded-0.elevation-3
 
       //Keyword Selection
-      span.title.white--text 
+      span.title
         | Keywords
-      v-select.rounded-0(:items="keywords" solo @change="function(item) {$emit('trend-select', item); selectedKeyword = item}")
+      v-select(:items="keywords" outlined @change="function(item) {$emit('trend-select', item); selectedKeyword = item}")
       div
-        span.title.white--text 
-          | Quick Actions
+        span.title
+          | Quick Lookup
         
         br
 
@@ -17,17 +17,17 @@
         v-btn-toggle(rounded dense v-if="selectedKeyword" style="width: 100%")
           v-btn(color="#222222" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%; color: white") 
             v-icon(color="white") mdi-triangle
-            | FullFact Lookup
+            | FullFact
           v-btn(color="#FBD440" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
             v-icon() mdi-desk-lamp
-            | Snopes Lookup
+            | Snopes
           v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
             v-icon() mdi-google
-            | Google Search
+            | Google
 
         //No keyword selected
         div(v-else)
-          span.font-weight-light.white--text 
+          span.font-weight-light
             | No actions available, select a keyword to view actions.  
         
       

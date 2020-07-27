@@ -5,7 +5,7 @@
 
     //Related topic chips
     v-chip-group(multiple='' active-class='primary--text' v-if="relatedTopics.length > 0")
-      v-chip(v-for='(trend, u) in this.relatedTopics' :key='u' target='_blank' :href='`https://fullfact.org/search/?q=${trend.topic.title}`' color='white')
+      v-chip(v-for='(trend, u) in this.relatedTopics' :key='u' target='_blank' :href='`https://www.google.com/search?q=${trend.topic.title}`')
         | {{ trend.topic.title }}
 
     //No related topics

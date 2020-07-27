@@ -25,9 +25,11 @@ div.fill-height
     v-tab-item.fill-height(:key='5')
       media-layout
 
-    v-tab-item(:key='6')
-      v-container
-        h1 Summary
+    v-tab-item.fill-height(:key='6')
+      v-container.fill-height
+        v-row.fill-height.px-lg-16(align='center' justify='center')
+          iframe(:src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`" width='640' height='613' frameborder='0' marginheight='0' marginwidth='0') Loading&mldr;
+
 
 
 
@@ -47,8 +49,8 @@ div.fill-height
         span Images
         v-icon mdi-image
       v-btn(@click="setTab(4); $emit('set-tab', 4)")
-        span Summary
-        v-icon mdi-clipboard-outline
+        span Feedback
+        v-icon mdi-bullhorn
 
     
 </template>
