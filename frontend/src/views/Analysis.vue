@@ -29,22 +29,27 @@ div.fill-height
       v-container
         h1 Summary
 
-  v-bottom-navigation(:value="tab" :color="tabColor" scroll-target="#scroll-area-1" hide-on-scroll absolute) 
-    v-btn(@click="setTab(0)")
-      span Profile
-      v-icon mdi-account
-    v-btn(@click="setTab(1)")
-      span Links
-      v-icon mdi-link
-    v-btn(@click="setTab(2)")
-      span Words
-      v-icon mdi-card-text-outline
-    v-btn(@click="setTab(3)")
-      span Images
-      v-icon mdi-image
-    v-btn(@click="setTab(4)")
-      span Summary
-      v-icon mdi-clipboard-outline
+
+
+
+
+    v-bottom-navigation(:value="tab" :color="tabColor" scroll-target="#scroll-area-1" hide-on-scroll fixed shift) 
+      v-btn(@click="setTab(0)")
+        span Profile
+        v-icon mdi-account
+      v-btn(@click="setTab(1)")
+        span Links
+        v-icon mdi-link
+      v-btn(@click="setTab(2)")
+        span Words
+        v-icon mdi-card-text-outline
+      v-btn(@click="setTab(3)")
+        span Images
+        v-icon mdi-image
+      v-btn(@click="setTab(4)")
+        span Summary
+        v-icon mdi-clipboard-outline
+
     
 </template>
 
@@ -94,7 +99,7 @@ export default {
           this.tabColor = "purple";
           break;
         case 4:
-          this.tabColor = "pink";
+          this.tabColor = "blue-grey darken-1";
           break;
       }
     }
