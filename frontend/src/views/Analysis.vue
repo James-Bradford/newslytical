@@ -30,6 +30,8 @@
 
     //Feedback Tab
     v-tab-item.fill-height(:key="6")
+      v-overlay(v-if="iframeLoad")
+        v-progress-circular(indeterminate="", color="primary", size="200")
       v-container.fill-height
         v-row.fill-height.px-lg-16(align="center", justify="center")
           iframe(
@@ -38,7 +40,8 @@
             height="613",
             frameborder="0",
             marginheight="0",
-            marginwidth="0"
+            marginwidth="0",
+            @load="iframeLoad = false"
           ) Loading&mldr;
 
     //Bottom Navigation
@@ -148,6 +151,14 @@ export default {
         words: false,
         images: false,
       },
+      /**
+       * True if the iframe is currently loading
+       */
+      iframeLoad: true,
+      /**
+       * True if the APIs are loading
+       */
+      isLoading: true,
     };
   },
   components: {
@@ -220,21 +231,15 @@ export default {
     tweet() {
       return this.$store.state.tweet;
     },
-    /**
-     * Loading state
-     */
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
   },
   created() {
     //Set loading variable, load VueX states
-    this.$store.commit("TOGGLE_IS_LOADING");
+    this.isLoading = true;
     this.$store.dispatch("loadRawTweet", this.$route.params.id);
     this.$store.dispatch("loadTweet", this.$route.params.id);
     this.$store.dispatch("loadTwitterTrendsUS");
     this.$store.dispatch("loadTwitterTrendsUK");
-    this.$store.commit("TOGGLE_IS_LOADING");
+    this.isLoading = false;
   },
 };
 </script>

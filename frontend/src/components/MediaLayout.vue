@@ -4,15 +4,13 @@
         v-row.px-lg-16.fill-height(justify='center' align='center' v-if="tweet.extended_entities")
             v-col(cols='12' md='8')
               //Carousel Card
-              v-card.pa-1.rounded-0(color="purple" style="max-height: 50%")
+              v-card.pa-1.rounded-0(color="purple")
                 v-card-title.white--text.text-h5 
                   v-icon(color="white") mdi-image
                   | Images
                 
-                v-carousel(hide-delimiter-background='' show-arrows-on-hover='')
+                v-carousel(hide-delimiter-background='' show-arrows-on-hover='' height="400")
                   media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
-            v-col(cols='12' md='4')
-
               info-steps(color="purple" :steps="steps")
 
 
