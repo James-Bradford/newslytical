@@ -7,7 +7,7 @@ div.fill-height
     v-row(justify-center align-center style="max-height: calc(100vh - 90px); overflow:auto")
 
       // Tab Content Start
-      v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab")
+      v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab" style="width: 100%")
         router-view
 
         // Tweet Tab
@@ -35,7 +35,7 @@ div.fill-height
           v-overlay(v-if="iframeLoad")
             v-progress-circular(indeterminate="", color="primary", size="200")
           v-container.fill-height
-            v-row.fill-height.px-lg-16(align="center", justify="center")
+            v-row(justify="center" align="center")
               iframe(
                 :src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`",
                 width="640",

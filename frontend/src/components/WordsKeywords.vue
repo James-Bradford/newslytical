@@ -19,7 +19,7 @@
       //No related topics
       div(v-else)
         span.font-weight-light
-          | No other topics found for this keyword.  Use the quick actions above for more context.    
+          | No other topics found for this keyword.  Use the quick actions below for more context.    
         
       
 </template>

@@ -84,7 +84,6 @@ v-container.px-lg-16.fill-height
 <script>
 //Import Components
 import WordsKeywords from "./WordsKeywords";
-import WordsOther from "./WordsOther";
 import InfoSteps from "./InfoSteps";
 import ExplanationPanel from "./ExplanationPanel";
 
@@ -194,7 +193,6 @@ export default {
   },
   components: {
     WordsKeywords,
-    WordsOther,
     InfoSteps,
     ExplanationPanel,
   },
