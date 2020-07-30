@@ -37,10 +37,6 @@
 </template>
 
 <script>
-//Import dependencies
-import axios from "axios";
-import Api from "../services/Api";
-
 /**
  * Provides a domain lookup
  */
