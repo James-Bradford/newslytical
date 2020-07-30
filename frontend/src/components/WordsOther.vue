@@ -4,8 +4,8 @@
     span.title.white--text Other Topics
 
     //Related topic chips
-    v-chip-group(multiple='' active-class='primary--text' v-if="relatedTopics.length > 0")
-      v-chip(v-for='(trend, u) in this.relatedTopics' :key='u' target='_blank' :href='`https://www.google.com/search?q=${trend.topic.title}`')
+    v-chip-group(v-if="relatedTopics.length > 0" active-class="chip-active" show-arrows)
+      v-chip(v-for='(trend, u) in this.relatedTopics.slice(0,4)' :key='u' target='_blank' :href='`https://www.google.com/search?q=${trend.topic.title}`')
         | {{ trend.topic.title }}
 
     //No related topics
@@ -31,4 +31,8 @@ export default {
 </script>
 
 <style>
+.chip-active{
+  background-color: #1A76D2;
+  color: white!important;
+}
 </style>

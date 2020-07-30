@@ -10,7 +10,7 @@
                   | Images
                 
                 v-carousel(hide-delimiter-background='' show-arrows-on-hover='' height="400")
-                  media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m")
+                  media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m" @loading="$emit('loading', $event)")
               info-steps(color="purple" :steps="steps")
 
 

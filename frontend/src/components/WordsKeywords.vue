@@ -7,28 +7,19 @@
       span.title
         | Keywords
       v-select(:items="keywords" outlined @change="function(item) {$emit('trend-select', item); selectedKeyword = item}")
-      div
-        span.title
-          | Quick Lookup
-        
-        br
 
-        //Quick Action Buttons
-        v-btn-toggle(rounded dense v-if="selectedKeyword" style="width: 100%")
-          v-btn(color="#222222" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%; color: white") 
-            v-icon(color="white") mdi-triangle
-            | FullFact
-          v-btn(color="#FBD440" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
-            v-icon() mdi-desk-lamp
-            | Snopes
-          v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
-            v-icon() mdi-google
-            | Google
 
-        //No keyword selected
-        div(v-else)
-          span.font-weight-light
-            | No actions available, select a keyword to view actions.  
+      span.title Other Topics
+
+      //Related topic chips
+      v-chip-group(v-if="relatedTopics.length > 0" active-class="chip-active" show-arrows)
+        v-chip(v-for='(trend, u) in this.relatedTopics.slice(0,4)' :key='u' target='_blank' @click="$emit('related-select', trend.topic.title)")
+          | {{ trend.topic.title }}
+
+      //No related topics
+      div(v-else)
+        span.font-weight-light
+          | No other topics found for this keyword.  Use the quick actions above for more context.    
         
       
 </template>
@@ -44,22 +35,26 @@ import rake from "@simonjb/rake-js";
 export default {
   name: "WordsKeywords",
   data() {
-      return {
-          keywords: [],
-          selectedKeyword: null
-      }
+    return {
+      keywords: [],
+      selectedKeyword: null,
+    };
+  },
+  props: {
+    relatedTopics: Array,
+    topicsLoading: Boolean,
   },
   computed: {
     tweet() {
       return this.$store.state.rawTweet;
-    }
+    },
   },
   created() {
     this.keywords = rake(this.tweet.full_text);
     for (let i = 0; this.tweet.entities.hashtags.length > i; i++) {
       this.keywords.push(this.tweet.entities.hashtags[i].text);
     }
-  }
+  },
 };
 </script>
 

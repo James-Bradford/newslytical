@@ -1,55 +1,56 @@
 <template lang="pug">
-.fill-height
+div.fill-height
   //Loading Overlay
   v-overlay(v-if="isLoading")
     v-progress-circular(indeterminate="", color="primary", size="200")
+  v-container.fill-height 
+    v-row(justify-center align-center style="max-height: calc(100vh - 90px); overflow:auto")
 
-  // Tab Content Start
-  v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab")
-    router-view
+      // Tab Content Start
+      v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab")
+        router-view
 
-    // Tweet Tab
-    v-tab-item.fill-height(:key="1")
-      tweet-layout
+        // Tweet Tab
+        v-tab-item.fill-height(:key="1")
+          tweet-layout
 
-    // Profile Tab
-    v-tab-item.fill-height(:key="2")
-      profile-layout
+        // Profile Tab
+        v-tab-item.fill-height(:key="2")
+          profile-layout
 
-    //Keywords Tab
-    v-tab-item.fill-height(:key="3")
-      words-layout
+        //Keywords Tab
+        v-tab-item.fill-height(:key="3")
+          words-layout(@loading="setLoading($event)")
 
-    // Link Tab
-    v-tab-item.fill-height(:key="4")
-      link-layout
+        // Link Tab
+        v-tab-item.fill-height(:key="4")
+          link-layout
 
-    //Images Tab
-    v-tab-item.fill-height(:key="5")
-      media-layout
+        //Images Tab
+        v-tab-item.fill-height(:key="5")
+          media-layout(@loading="setLoading($event)")
 
-    //Feedback Tab
-    v-tab-item.fill-height(:key="6")
-      v-overlay(v-if="iframeLoad")
-        v-progress-circular(indeterminate="", color="primary", size="200")
-      v-container.fill-height
-        v-row.fill-height.px-lg-16(align="center", justify="center")
-          iframe(
-            :src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`",
-            width="640",
-            height="613",
-            frameborder="0",
-            marginheight="0",
-            marginwidth="0",
-            @load="iframeLoad = false"
-          ) Loading&mldr;
+        //Feedback Tab
+        v-tab-item.fill-height(:key="6")
+          v-overlay(v-if="iframeLoad")
+            v-progress-circular(indeterminate="", color="primary", size="200")
+          v-container.fill-height
+            v-row.fill-height.px-lg-16(align="center", justify="center")
+              iframe(
+                :src="`https://docs.google.com/forms/d/e/1FAIpQLSfmxO8iNGx_1w_5pM5u4z7eJLVAUTUDu9pEpUPwHi1fihNOyw/viewform?embedded=true&entry.1512243468=${$route.params.id}`",
+                width="640",
+                height="613",
+                frameborder="0",
+                marginheight="0",
+                marginwidth="0",
+                @load="iframeLoad = false"
+              ) Loading&mldr;
 
     //Bottom Navigation
     v-bottom-navigation(
       :value="tab",
       :color="tabColor",
       scroll-target="#scroll-area-1",
-      hide-on-scroll,
       fixed,
       shift
     ) 
@@ -223,6 +224,15 @@ export default {
         return "";
       }
     },
+    /**
+     * Sets the loading status
+     * 
+     * @param Event Loading Status
+     */
+    setLoading(event) {
+      this.isLoading = event;
+      console.log(this.isLoading);
+    }
   },
   computed: {
     /**

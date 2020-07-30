@@ -9,12 +9,30 @@ v-container.px-lg-16.fill-height
           | Words
 
         //Card Content
-        words-keywords(@trend-select="selectTrend($event)")
-        words-other(
-          v-if="relatedTopics",
-          :related-topics="relatedTopics",
-          :topicsLoading="topicsLoading"
-        )
+        words-keywords(@trend-select="selectTrend($event)" @related-select="selectedKeyword = $event" :related-topics="relatedTopics")
+
+        v-card-text
+          span.title.white--text
+            | Quick Lookup
+        
+          br
+
+          //Quick Action Buttons
+          v-btn-toggle(rounded dense v-if="selectedKeyword" style="width: 100%")
+            v-btn(color="#222222" target="_blank" :href="`https://fullfact.org/search/?q=${selectedKeyword}`" style="width: 33%; color: white") 
+              v-icon(color="white") mdi-triangle
+              | FullFact
+            v-btn(color="#FBD440" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
+              v-icon() mdi-desk-lamp
+              | Snopes
+            v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
+              v-icon() mdi-google
+              | Google
+
+          //No keyword selected
+          div(v-else)
+            span.font-weight-light.white--text
+              | No actions available, select a keyword to view actions.  
 
         //Explanation Expansion Panels
         v-card.pa-1.rounded-0(color="accent")
@@ -84,7 +102,6 @@ export default {
   data() {
     return {
       relatedTopics: [],
-      topicsLoading: Boolean,
       keywordSelected: Boolean,
       panels: [
         {
@@ -111,11 +128,18 @@ export default {
           completed: false,
         },
       ],
+      /**
+       * Progress bar attributes
+       */
       progress: {
         color: null,
         backgroundColor: null,
         value: null,
       },
+      /**
+       * Word selected for lookup
+       */
+      selectedKeyword: null,
     };
   },
   methods: {
@@ -125,21 +149,23 @@ export default {
      * @param e Keyword
      */
     selectTrend(e) {
+      this.selectedKeyword = e;
       if (e) {
         this.keywordSelected = true;
       } else {
         this.keywordSelected = false;
       }
       var self = this;
-      this.topicsLoading = true;
+      this.$emit('loading', true);
       Api.get(`trends/related/${e}`)
         .then(function (result) {
           self.relatedTopics = result.data.default.rankedList[0].rankedKeyword;
+        }).then(function() {
+          self.$emit('loading', false);
         })
         .catch((e) => {
           console.log(e);
         });
-      this.topicsLoading = false;
     },
     /**
      * Provides a sentiment analysis for the Tweet
