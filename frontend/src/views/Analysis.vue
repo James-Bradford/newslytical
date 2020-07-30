@@ -3,8 +3,8 @@ div.fill-height
   //Loading Overlay
   v-overlay(v-if="isLoading")
     v-progress-circular(indeterminate="", color="primary", size="200")
-  v-container.fill-height 
-    v-row(justify-center align-center style="max-height: calc(100vh - 90px); overflow:auto")
+  v-container.fill-height
+    v-row(justify-center align-center style="height: calc(100vh - 110px); overflow:auto")
 
       // Tab Content Start
       v-tabs-items.tab-background.fill-height.pt-10.pb-12.py-md-0(v-model="tab" style="width: 100%")
