@@ -10,7 +10,7 @@
 
     // Tweet Tab
     v-tab-item.fill-height(:key="1")
-      h1 Tweet
+      tweet-layout
 
     // Profile Tab
     v-tab-item.fill-height(:key="2")
