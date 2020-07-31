@@ -9,8 +9,20 @@
                   v-icon(color="white") mdi-image
                   | Images
                 
-                v-carousel(hide-delimiter-background='' show-arrows-on-hover='' height="400")
-                  media-carousel(v-for="media, m in tweet.extended_entities.media" :media="media" :key="m" @loading="$emit('loading', $event)")
+                v-carousel(hide-delimiter-background='' show-arrows-on-hover='' height="400" v-if="tweet.extended_entities")
+                    v-card(v-for="media, m in tweet.extended_entities.media" :key="m" v-model="selectedImage")
+                      v-carousel-item
+                        v-img(:src="media.media_url" @load="$emit('loading', false)" contain)
+                          
+                //Quick Action Buttons
+                v-btn-toggle.rounded-0.mt-2(dense style="width: 100%" v-if="tweet.extended_entities")
+                  v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?tbm=isch&q=${tweet.extended_entities.media[selectedImage].media_url}`" style="width: 50%;") 
+                    v-icon() mdi-google
+                    | Google Images
+                  v-btn(color="#008373" target="_blank" :href="`https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIVSP&sbisrc=UrlPaste&q=imgurl:${tweet.extended_entities.media[selectedImage].media_url}`" style="width: 50%") 
+                    v-icon() mdi-microsoft-bing
+                    | Bing Images
+              
               info-steps(color="purple" :steps="steps")
 
 
@@ -47,9 +59,10 @@ export default {
           icon: "mdi-image-search-outline",
           subtitle: "Reverse Image Search",
           description:
-            "In some cases, misinformation can take the form of edited images. Images can be taken out of context causing people to misunderstand the meaning behind it.  A reverse image search will lookup similar images on the internet so that you can better understand the origin.</br></br><blockquote>Manipulation of images has become an increasingly common occurrence with the advent of digital photos, power- ful image manipulation software, and knowledge of techniques. Effects may range from simple to complex. Simple adjustments can include increasing color saturation and removing minor elements. More-invasive changes can include removing or inserting a person into an image.</blockquote>"
+            "In some cases, misinformation can take the form of edited images. Images can be taken out of context causing people to misunderstand the meaning behind it.  A reverse image search will lookup similar images on the internet so that you can better understand the origin.</br></br><blockquote>Manipulation of images has become an increasingly common occurrence with the advent of digital photos, power- ful image manipulation software, and knowledge of techniques. Effects may range from simple to complex. Simple adjustments can include increasing color saturation and removing minor elements. More-invasive changes can include removing or inserting a person into an image.  Use the reverse image tools above to find out more information about the images.</blockquote>"
         }
-      ]
+      ],
+      selectedImage: 0,
     };
   }
 };

@@ -6,6 +6,14 @@ v-container(fill-height='')
     v-col(cols='12' md='8')
       tweet-card(v-if="this.$store.state.tweet")
 
+    v-col(cols='12' md='4')
+      v-card.pa-1.rounded-0(color="accent")
+        v-card-title.py-1.white--text
+          | Information
+        v-card-text.white--text
+          hr
+          | Newslytical aims to provide some context to a Tweet to help you make an informed decision on whether to trust the information it presents.  Each section contains a checklist to make sure you don't miss anything.  Once you have visited every section, a survey will appear to collect information about your experience.  This will help us to improve our website.
+
 </template>
 
 <script>

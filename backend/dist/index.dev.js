@@ -16,6 +16,8 @@ var cors = require('cors');
 
 var Twitter = require('twitter');
 
+var kahaki = require('kahaki');
+
 var googleTrends = require('google-trends-api');
 
 var axios = require('axios');
@@ -38,14 +40,6 @@ app.get('/api/twitter/tweet/:id', function (req, res) {
   }, function (error, tweet, response) {
     res.send(tweet);
   });
-}); // Get a trends for a given location
-
-app.get('/api/twitter/trends/:id', function (req, res) {
-  client.get("trends/place", {
-    id: req.params.id
-  }, function (error, trends, response) {
-    res.send(trends);
-  });
 }); // Perform a whois lookup on a given domain
 
 app.get('/api/whois/:domain', function (req, res) {
@@ -53,26 +47,6 @@ app.get('/api/whois/:domain', function (req, res) {
     res.send(response.data);
   })["catch"](function (err) {
     return console.log(err);
-  });
-}); // Get the daily trends for a given country
-
-app.get('/api/trends/daily/:geo', function (req, res) {
-  googleTrends.dailyTrends({
-    geo: req.params.geo
-  }).then(function (results) {
-    res.send(results);
-  })["catch"](function (err) {
-    console.error('Oh no there was an error', err);
-  });
-}); // Get the interest over time for a given word
-
-app.get('/api/trends/interest/:word', function (req, res) {
-  googleTrends.interestOverTime({
-    keyword: req.params.word
-  }).then(function (results) {
-    res.send(results);
-  })["catch"](function (err) {
-    console.error('Oh no there was an error', err);
   });
 }); // Get related topics for a given word
 
@@ -84,6 +58,31 @@ app.get('/api/trends/related/:word', function (req, res) {
   })["catch"](function (err) {
     console.error('Oh no there was an error', err);
   });
+}); // Get url metadata for a given url
+
+app.get('/api/metadata/', function (req, res) {
+  (function _callee() {
+    var result;
+    return regeneratorRuntime.async(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return regeneratorRuntime.awrap(kahaki.getPreview(req.query.url, {
+              subObject: true
+            }));
+
+          case 2:
+            result = _context.sent;
+            res.send(result);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  })();
 }); //Start Server
 
 var port = process.env.PORT || 3000;

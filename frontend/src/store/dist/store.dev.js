@@ -153,24 +153,6 @@ var store = new _vuex["default"].Store({
         }
       });
     },
-    loadTwitterTrendsUK: function loadTwitterTrendsUK() {
-      var self = this;
-
-      _Api["default"].get("twitter/trends/44418").then(function (result) {
-        self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
-      })["catch"](function (error) {
-        throw new Error("API ERROR");
-      });
-    },
-    loadTwitterTrendsUS: function loadTwitterTrendsUS() {
-      var self = this;
-
-      _Api["default"].get("twitter/trends/2459115").then(function (result) {
-        self.commit('SAVE_TWITTER_TRENDS_US', result.data);
-      })["catch"](function (error) {
-        throw new Error("API ERROR");
-      });
-    },
     setTab: function setTab(_ref4, tab) {
       var commit = _ref4.commit;
       this.commit('SAVE_TAB', tab);

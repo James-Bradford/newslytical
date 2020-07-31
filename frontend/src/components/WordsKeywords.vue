@@ -59,4 +59,8 @@ export default {
 </script>
 
 <style>
+.chip-active {
+  background-color: var(--v-primary-base);
+  color: white;
+}
 </style>

@@ -119,26 +119,6 @@ export const store = new Vuex.Store({
             //Assign local variable
             commit('SAVE_WHOIS', whois);
         },
-        loadTwitterTrendsUK() {
-            var self = this;
-
-            Api.get(`twitter/trends/44418`)
-                .then(function (result) {
-                    self.commit('SAVE_TWITTER_TRENDS_UK', result.data);
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-        },
-        loadTwitterTrendsUS() {
-            var self = this;
-
-            Api.get(`twitter/trends/2459115`)
-                .then(function (result) {
-                    self.commit('SAVE_TWITTER_TRENDS_US', result.data);
-                }).catch(error => {
-                    throw new Error("API ERROR");
-                });
-        },
         setTab({ commit }, tab) {
             this.commit('SAVE_TAB', tab);
         }

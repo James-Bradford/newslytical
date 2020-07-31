@@ -11,6 +11,7 @@ const express = require('express');
 const app = express();
 var cors = require('cors');
 var Twitter = require('twitter');
+var kahaki = require('kahaki');
 const googleTrends = require('google-trends-api');
 
 var axios = require('axios');
@@ -33,15 +34,6 @@ app.get('/api/twitter/tweet/:id', (req, res) => {
     });
 })
 
-// Get a trends for a given location
-app.get('/api/twitter/trends/:id', (req, res) => {
-
-    client.get(`trends/place`, { id: req.params.id }, function (error, trends, response) {
-        res.send(trends);
-    });
-
-})
-
 // Perform a whois lookup on a given domain
 app.get('/api/whois/:domain', (req, res) => {
     axios.get(`https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=${process.env.WHOIS_API_KEY}&outputFormat=JSON&domainName=${req.params.domain}`)
@@ -49,29 +41,6 @@ app.get('/api/whois/:domain', (req, res) => {
             res.send(response.data);
         })
         .catch(err => console.log(err));
-})
-
-
-// Get the daily trends for a given country
-app.get('/api/trends/daily/:geo', (req, res) => {
-    googleTrends.dailyTrends({ geo: req.params.geo })
-        .then(results => {
-            res.send(results);
-        })
-        .catch(function (err) {
-            console.error('Oh no there was an error', err);
-        });
-})
-
-// Get the interest over time for a given word
-app.get('/api/trends/interest/:word', (req, res) => {
-    googleTrends.interestOverTime({ keyword: req.params.word })
-        .then(results => {
-            res.send(results);
-        })
-        .catch(function (err) {
-            console.error('Oh no there was an error', err);
-        });
 })
 
 // Get related topics for a given word
@@ -83,6 +52,14 @@ app.get('/api/trends/related/:word', (req, res) => {
         .catch(function (err) {
             console.error('Oh no there was an error', err);
         });
+})
+
+// Get url metadata for a given url
+app.get('/api/metadata/', (req, res) => {
+    (async () => {
+        const result = await kahaki.getPreview(req.query.url,{ subObject: true });
+    res.send(result);
+})();
 })
 
 //Start Server
