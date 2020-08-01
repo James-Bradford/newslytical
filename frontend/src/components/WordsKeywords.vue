@@ -61,6 +61,6 @@ export default {
 <style>
 .chip-active {
   background-color: var(--v-primary-base);
-  color: white;
+  color: white!important;
 }
 </style>

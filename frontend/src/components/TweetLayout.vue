@@ -7,7 +7,7 @@ v-container(fill-height='')
       tweet-card(v-if="this.$store.state.tweet")
 
     v-col(cols='12' md='4')
-      v-card.pa-1.rounded-0(color="accent")
+      v-card.pa-1.rounded-0(color="info")
         v-card-title.py-1.white--text
           | Information
         v-card-text.white--text

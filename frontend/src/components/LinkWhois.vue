@@ -1,10 +1,14 @@
 <template lang="pug">
+//WHOIS Card
 v-card.pa-2.elevation-4.rounded-0(color="warning", v-if="tweet.entities")
+  //WHOIS Card Title
   v-card-title.pa-2.white--text.text-h4
     v-icon.mdi.mdi-link(color="white", x-large)
     | Links
   v-card-text
     v-divider.ma-2(color="white")
+
+  //WHOIS Expansion Panel
   v-expansion-panels(
     v-if="this.tweet.entities.urls.length > 0",
     v-model="defaultPanel"
@@ -41,8 +45,9 @@ v-card.pa-2.elevation-4.rounded-0(color="warning", v-if="tweet.entities")
               v-icon.mdi.mdi-clock
               | Created: {{ whois[u].WhoisRecord.registryData.createdDate }}
           v-col(cols="6")
-            | 
+            |
 
+  //No Links
   .pa-2.white--text.text-justify(v-else) We haven't detected any links in this Tweet. If we've got it wrong and there are links, please think carefully before clicking them and use your own discretion.
 </template>
 
@@ -95,21 +100,6 @@ export default {
       } else {
         return false;
       }
-    },
-    /**
-     * Get URL Metadata
-     *
-     * @param url URL
-     */
-    getMetadata(url) {
-      Api.get(`metadata?url=${url}`)
-        .then(function (result) {
-          console.log(result.data);
-          return result.data;
-        })
-        .catch((error) => {
-          throw new Error("API ERROR");
-        });
     },
   },
 };
