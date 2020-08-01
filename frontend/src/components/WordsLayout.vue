@@ -25,9 +25,8 @@ v-container.px-lg-16.fill-height
             v-btn(color="#FBD440" target="_blank" :href="`https://www.snopes.com/?s=${selectedKeyword}`" style="width: 33%") 
               v-icon() mdi-desk-lamp
               | Snopes
-            v-btn(color="#4285F4" target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
-              v-icon() mdi-google
-              | Google
+            v-btn(target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
+              v-img(src="../assets/google.png" height="25px" contain)
 
           //No keyword selected
           div(v-else)
@@ -67,15 +66,15 @@ v-container.px-lg-16.fill-height
                 div(
                   v-if="sentimentAnalysis().score >= 4 || sentimentAnalysis().score <= -4"
                 ) 
-                  | The score is strongly weighted and indicates strong emotion. Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation. It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
+                  | The sentiment analysis score for this Tweet is strongly weighted and indicates strong emotion. Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation. It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
                 div(
                   v-else-if="sentimentAnalysis().score >= 3 || sentimentAnalysis().score <= -3"
                 )
-                  | The score is quite strongly weighted and indicates some emotion. Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation. It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
+                  | The sentiment analysis score for this Tweet is quite strongly weighted and indicates some emotion. Research has found that text with a strong positive or negative reaction to it is more likely to include misinformation. It is also indicative of opinion rather than fact. Carrying out further research on the keywords above will help make your decision.
                 div(v-else-if="sentimentAnalysis().score == 0")
-                  | The score has shown that the Tweet balances out in terms of positive and negative language. While not always the case, this can indicate more trustworthy and factual content. Carrying out further research on the keywords above will help make your decision.
+                  | The sentiment analysis score for this Tweet has shown that the Tweet balances out in terms of positive and negative language. While not always the case, this can indicate more trustworthy and factual content. Carrying out further research on the keywords above will help make your decision.
                 div(v-else)
-                  | The score has a weak positive or negative emotion. This means that it might be more likely to contain trustworthy or factual content. Carrying out further research on the keywords above will help make your decision.
+                  | The sentiment analysis score for this Tweet has a weak positive or negative emotion. This means that it might be more likely to contain trustworthy or factual content. Carrying out further research on the keywords above will help make your decision.
 
     v-col(cols="12", md="4")
       explanation-panel(:color="'accent'", :steps="steps")

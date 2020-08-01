@@ -1,4 +1,5 @@
 <template lang="pug">
+
 //WHOIS Card
 v-card.pa-2.elevation-4.rounded-0(color="warning", v-if="tweet.entities")
   //WHOIS Card Title

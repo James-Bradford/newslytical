@@ -1,6 +1,10 @@
 <template lang="pug">
+
+//Container
 v-container.px-lg-16.fill-height
   v-row.px-lg-16(justify="center", align="center")
+
+    //Left Column
     v-col(cols="12", md="8")
       link-whois(v-if="tweet")
       info-steps(
@@ -8,8 +12,11 @@ v-container.px-lg-16.fill-height
         :steps="panels",
         @panel-clicked="panelClicked($event)"
       )
+    
+    //Right Column
     v-col(cols="12", md="4")
       explanation-panel(:color="'warning'", :steps="steps")
+
 </template>
 
 <script>
@@ -45,7 +52,7 @@ export default {
           icon: "mdi-lock",
           subtitle: "HTTPS Encryption",
           description:
-            "<blockquote>Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which is the primary protocol used to send data between a web browser and a website. HTTPS is encrypted in order to increase security of data transfer. This is particularly important when users transmit sensitive data, such as by logging into a bank account, email service, or health insurance provider.  Any website, especially those that require login credentials, should use HTTPS. In modern web browsers such as Chrome, websites that do not use HTTPS are marked differently than those that are. Look for a green padlock in the URL bar to signify the webpage is secure. </blockquote></br><div class='reference'>Cloudflare. What is HTTPS?. Available: https://www.cloudflare.com/learning/ssl/what-is-https. Last accessed 18th Jul 2020.</div>",
+            "HTTPS encryption is usually but not always an indicator of a legitimate website.  It keeps the data exchanged with the website secure and ensures that it cannot be intercepted.  Be aware however that anyone can make their websites HTTPS encrypted using a free service like Cloudflare.  This means malicious sites may also utilise this kind of encryption.</br></br><blockquote>Hypertext transfer protocol secure (HTTPS) is the secure version of HTTP, which is the primary protocol used to send data between a web browser and a website. HTTPS is encrypted in order to increase security of data transfer.</blockquote></br><div class='reference'>Cloudflare. What is HTTPS?. Available: https://www.cloudflare.com/learning/ssl/what-is-https. Last accessed 18th Jul 2020.</div>",
         },
         {
           icon: "mdi-clipboard-account-outline",
