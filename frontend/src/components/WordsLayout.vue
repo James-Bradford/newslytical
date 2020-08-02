@@ -26,7 +26,8 @@ v-container.px-lg-16.fill-height
               v-icon() mdi-desk-lamp
               | Snopes
             v-btn(target="_blank" :href="`https://www.google.com/search?q=${selectedKeyword}`" style="width: 34%;") 
-              v-img(src="../assets/google.png" height="25px" contain)
+              v-icon(color="#689EF7") mdi-google
+              | &nbsp; Google
 
           //No keyword selected
           div(v-else)

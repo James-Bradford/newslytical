@@ -1,6 +1,4 @@
 import axios from "axios";
-
-const baseDomain = "http://127.0.0.1:4000";
-const baseURL = `${baseDomain}/api`;
-
-export default axios.create({ baseURL });
+export default axios.create({ 
+    baseURL: process.env.BACKEND_URL ? process.env.BACKEND_URL : 'https://api.newslytical.uk/api' 
+    });

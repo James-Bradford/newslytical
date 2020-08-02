@@ -32,11 +32,9 @@ v-container(fill-height='')
 </template>
 
 <script>
-import { Twitter } from "../services/Twitter";
 
 import TweetCard from "./TweetCard";
 
-var twitter = new Twitter();
 
 export default {
   name: "TweetLayout",

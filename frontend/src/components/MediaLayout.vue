@@ -21,9 +21,11 @@ v-container.px-lg-16.fill-height
         div(style="height: 45px")
           v-btn-toggle.rounded-0.mt-2(dense style="width: 100%" v-if="tweet.extended_entities")
             v-btn(color="#008373" target="_blank" :href="`https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIVSP&sbisrc=UrlPaste&q=imgurl:${tweet.extended_entities.media[selectedImage].media_url}`" style="width: 50%") 
-              v-img(src="../assets/bing.png" max-height="25px" contain)
+              v-icon(color="#F6CA58") mdi-microsoft-bing
+              | &nbsp; Bing
             v-btn(target="_blank" :href="`https://www.google.com/search?tbm=isch&q=${tweet.extended_entities.media[selectedImage].media_url}`" style="width: 50%;") 
-              v-img(src="../assets/google.png" height="25px" contain)
+              v-icon(color="#689EF7") mdi-google
+              | &nbsp; Google
           
       info-steps(color="purple" :steps="steps")
 
