@@ -23,7 +23,7 @@ port.onMessage.addListener(
       document.getElementById("report").style.display = "block";
       document.getElementById("icon").style.color = "#1DA1F2";
       document.getElementById("id").innerHTML = message.id;
-      document.getElementById("report").href = "http://localhost:8080/#/analysis/" + message.id;
+      document.getElementById("report").href = "https://newslytical.uk/#/analysis/" + message.id;
     } else {
       document.getElementById("detected").innerHTML = "No Tweet detected";
       document.getElementById("report").style.display = "none";
