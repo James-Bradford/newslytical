@@ -15,7 +15,7 @@
     "core-js": "^3.6.5",
     "node-rake": "^1.0.1",
     "psl": "^1.8.0",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sentiment": "^5.0.2",
     "unique-words": "^2.0.1",
